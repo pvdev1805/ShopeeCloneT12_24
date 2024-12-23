@@ -1,13 +1,10 @@
 import { useForm } from 'react-hook-form'
 import { Link } from 'react-router-dom'
-import { getRules } from '../../utils/rules'
+import { Schema, schema } from '../../utils/rules'
 import Input from '../../components/Input'
+import { yupResolver } from '@hookform/resolvers/yup'
 
-interface FormData {
-  email: string
-  password: string
-  confirm_password: string
-}
+type FormData = Schema
 
 const Register = () => {
   const {
@@ -16,9 +13,11 @@ const Register = () => {
     watch,
     getValues,
     formState: { errors }
-  } = useForm<FormData>()
+  } = useForm<FormData>({
+    resolver: yupResolver(schema)
+  })
 
-  const rules = getRules(getValues)
+  // const rules = getRules(getValues)
 
   const onSubmit = handleSubmit(
     (data) => {
@@ -52,7 +51,6 @@ const Register = () => {
                   className='mt-8'
                   placeholder='Email'
                   errorMessage={errors.email?.message}
-                  rules={rules.email}
                   autoComplete='on'
                 />
 
@@ -63,7 +61,6 @@ const Register = () => {
                   className='mt-2'
                   placeholder='Password'
                   errorMessage={errors.password?.message}
-                  rules={rules.password}
                   autoComplete='on'
                 />
 
@@ -74,7 +71,6 @@ const Register = () => {
                   className='mt-2'
                   placeholder='Confirm Password'
                   errorMessage={errors.confirm_password?.message}
-                  rules={rules.confirm_password}
                   autoComplete='on'
                 />
 
