@@ -1,6 +1,6 @@
 import { useForm } from 'react-hook-form'
 import { Link } from 'react-router-dom'
-import { rules } from '../../utils/rules'
+import { getRules } from '../../utils/rules'
 
 interface FormData {
   email: string
@@ -12,14 +12,28 @@ const Register = () => {
   const {
     register,
     handleSubmit,
+    watch,
+    getValues,
     formState: { errors }
   } = useForm<FormData>()
 
-  const onSubmit = handleSubmit((data) => {
-    console.log(data)
-  })
+  const rules = getRules(getValues)
 
-  console.log('errors', errors)
+  const onSubmit = handleSubmit(
+    (data) => {
+      console.log(data)
+    },
+    (data) => {
+      const password = getValues('password')
+
+      console.log('Password', password)
+    }
+  )
+
+  // const formValues = watch('password')
+  // console.log('Password', formValues)
+
+  // console.log('errors', errors)
 
   return (
     <>
@@ -44,6 +58,7 @@ const Register = () => {
                 <div className='mt-2'>
                   <input
                     type='password'
+                    autoComplete='on'
                     className='p-3 w-full outline-none border border-gray-300 focus:border-gray-500 rounded-sm focus:shadow-sm'
                     placeholder='Password'
                     {...register('password', rules.password)}
@@ -55,9 +70,12 @@ const Register = () => {
                 <div className='mt-2'>
                   <input
                     type='password'
+                    autoComplete='on'
                     className='p-3 w-full outline-none border border-gray-300 focus:border-gray-500 rounded-sm focus:shadow-sm'
                     placeholder='Confirm Password'
-                    {...register('confirm_password', rules.confirm_password)}
+                    {...register('confirm_password', {
+                      ...rules.confirm_password
+                    })}
                   />
 
                   <div className='mt-1 text-red-600 min-h-[1.25rem] text-sm'>{errors.confirm_password?.message} </div>

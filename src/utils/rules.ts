@@ -1,10 +1,10 @@
-import type { RegisterOptions } from 'react-hook-form'
+import type { RegisterOptions, UseFormGetValues } from 'react-hook-form'
 
 type Rules = {
   [key in 'email' | 'password' | 'confirm_password']?: RegisterOptions
 }
 
-export const rules: Rules = {
+export const getRules = (getValues?: UseFormGetValues<any>): Rules => ({
   email: {
     required: {
       value: true,
@@ -49,6 +49,10 @@ export const rules: Rules = {
     minLength: {
       value: 6,
       message: 'Must be between 6 and 160 characters long'
-    }
+    },
+    validate:
+      typeof getValues === 'function'
+        ? (value) => value === getValues('password') || 'The passwords do not match'
+        : undefined
   }
-}
+})

@@ -36,6 +36,7 @@ const Login = () => {
                   <input
                     type='password'
                     name='password'
+                    autoComplete='on'
                     className='p-3 w-full outline-none border border-gray-300 focus:border-gray-500 rounded-sm focus:shadow-sm'
                     placeholder='Password'
                   />
