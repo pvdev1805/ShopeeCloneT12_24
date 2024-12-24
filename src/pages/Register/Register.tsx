@@ -6,6 +6,8 @@ import { Schema, schema } from '../../utils/rules'
 import { omit } from 'lodash'
 import Input from '../../components/Input'
 import { registerAccount } from '../../apis/auth.api'
+import { isAxiosUnprocessableEntityError } from '../../utils/utils'
+import { ResponseApi } from '../../types/utils.type'
 
 type FormData = Schema
 
@@ -14,6 +16,7 @@ const Register = () => {
     register,
     handleSubmit,
     watch,
+    setError,
     getValues,
     formState: { errors }
   } = useForm<FormData>({
@@ -30,6 +33,36 @@ const Register = () => {
     registerAccountMutation.mutate(body, {
       onSuccess: (data) => {
         console.log('data', data)
+      },
+      onError: (error) => {
+        if (isAxiosUnprocessableEntityError<ResponseApi<Omit<FormData, 'confirm_password'>>>(error)) {
+          const formError = error.response?.data.data
+
+          if (formError) {
+            Object.keys(formError).forEach((key) => {
+              setError(key as keyof Omit<FormData, 'confirm_password'>, {
+                message: formError[key as keyof Omit<FormData, 'confirm_password'>],
+                type: 'Server'
+              })
+            })
+          }
+
+          // if (formError?.email) {
+          //   setError('email', {
+          //     message: formError.email,
+          //     type: 'Server'
+          //   })
+          // }
+
+          // if (formError?.password) {
+          //   setError('password', {
+          //     message: formError.password,
+          //     type: 'Server'
+          //   })
+          // }
+        }
+
+        console.log('error', error)
       }
     })
   })
