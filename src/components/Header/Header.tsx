@@ -1,12 +1,44 @@
+import { useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
+import { FloatingPortal, useFloating, arrow, shift, offset } from '@floating-ui/react'
+import { motion, AnimatePresence } from 'motion/react'
 
 const Header = () => {
+  const [isOpen, setIsOpen] = useState(false)
+
+  const arrowRef = useRef(null)
+
+  const { x, y, strategy, refs, floatingStyles, middlewareData } = useFloating({
+    open: isOpen,
+    onOpenChange: setIsOpen,
+    middleware: [
+      offset(6),
+      shift(),
+      arrow({
+        element: arrowRef
+      })
+    ]
+  })
+
+  const showPopover = () => {
+    setIsOpen(true)
+  }
+
+  const hidePopover = () => {
+    setIsOpen(false)
+  }
+
   return (
     <>
       <div className='pb-5 pt-2 bg-gradient-to-r from-[#f53d2d] to-[#f63] text-white'>
         <div className='container'>
           <div className='flex justify-end'>
-            <div className='flex items-center py-1 hover:text-gray-300 cursor-pointer'>
+            <div
+              className='flex items-center py-1 hover:text-gray-300 cursor-pointer'
+              ref={refs.setReference}
+              onMouseEnter={showPopover}
+              onMouseLeave={hidePopover}
+            >
               <svg
                 xmlns='http://www.w3.org/2000/svg'
                 fill='none'
@@ -34,7 +66,76 @@ const Header = () => {
               >
                 <path strokeLinecap='round' strokeLinejoin='round' d='m19.5 8.25-7.5 7.5-7.5-7.5' />
               </svg>
+
+              <FloatingPortal>
+                <AnimatePresence>
+                  {isOpen && (
+                    <motion.div
+                      ref={refs.setFloating}
+                      style={{
+                        ...floatingStyles,
+                        position: strategy,
+                        top: y ?? 0,
+                        left: x ?? 0,
+                        transformOrigin: `${middlewareData.arrow?.x}px top`
+                      }}
+                      initial={{ opacity: 0, transform: 'scale(0)' }}
+                      animate={{ opacity: 1, transform: 'scale(1)' }}
+                      exit={{ opacity: 0, transform: 'scale(0)' }}
+                      transition={{ duration: 0.2 }}
+                    >
+                      <div
+                        ref={arrowRef}
+                        style={{
+                          position: 'absolute',
+                          left: middlewareData.arrow?.x,
+                          top: middlewareData.arrow?.y
+                        }}
+                        className='border-x-transparent border-t-transparent border-b-white border-[11px] translate-y-[-94%] z-[1]'
+                      />
+
+                      <div className='bg-white relative shadow-md rounded-sm border border-gray-200'>
+                        <div className='flex flex-col py-2 px-3'>
+                          <button className='py-2 px-3 hover:text-orange'>English</button>
+                          <button className='py-2 px-3 hover:text-orange mt-2'>Tiếng Việt</button>
+                        </div>
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </FloatingPortal>
             </div>
+
+            {/* {isOpen && (
+              <FloatingPortal>
+                <AnimatePresence>
+                  <motion.div
+                    ref={refs.setFloating}
+                    style={floatingStyles}
+                    initial={{ opacity: 0, transform: 'scale(0)' }}
+                    animate={{ opacity: 1, transform: 'scale(1)' }}
+                    exit={{ opacity: 0, transform: 'scale(0)' }}
+                  >
+                    <div
+                      ref={arrowRef}
+                      style={{
+                        position: 'absolute',
+                        left: middlewareData.arrow?.x,
+                        top: middlewareData.arrow?.y
+                      }}
+                      className='border-x-transparent border-t-transparent border-b-white border-[11px] translate-y-[-94%] z-[1]'
+                    />
+
+                    <div className='bg-white relative shadow-md rounded-sm border border-gray-200'>
+                      <div className='flex flex-col py-2 px-3'>
+                        <button className='py-2 px-3 hover:text-orange'>English</button>
+                        <button className='py-2 px-3 hover:text-orange mt-2'>Tiếng Việt</button>
+                      </div>
+                    </div>
+                  </motion.div>
+                </AnimatePresence>
+              </FloatingPortal>
+            )} */}
 
             <div className='flex items-center py-1 hover:text-gray-300 cursor-pointer ml-6'>
               <div className='w-6 h-6 mr-2 flex-shrink-0'>
