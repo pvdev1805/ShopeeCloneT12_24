@@ -1,43 +1,23 @@
-import { useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { FloatingPortal, useFloating, arrow, shift, offset } from '@floating-ui/react'
-import { motion, AnimatePresence } from 'motion/react'
+import Popover from '../Popover'
 
 const Header = () => {
-  const [isOpen, setIsOpen] = useState(false)
-
-  const arrowRef = useRef(null)
-
-  const { x, y, strategy, refs, floatingStyles, middlewareData } = useFloating({
-    open: isOpen,
-    onOpenChange: setIsOpen,
-    middleware: [
-      offset(6),
-      shift(),
-      arrow({
-        element: arrowRef
-      })
-    ]
-  })
-
-  const showPopover = () => {
-    setIsOpen(true)
-  }
-
-  const hidePopover = () => {
-    setIsOpen(false)
-  }
-
   return (
     <>
       <div className='pb-5 pt-2 bg-gradient-to-r from-[#f53d2d] to-[#f63] text-white'>
         <div className='container'>
           <div className='flex justify-end'>
-            <div
+            <Popover
+              as='span'
               className='flex items-center py-1 hover:text-gray-300 cursor-pointer'
-              ref={refs.setReference}
-              onMouseEnter={showPopover}
-              onMouseLeave={hidePopover}
+              renderPopover={
+                <div className='bg-white relative shadow-md rounded-sm border border-gray-200'>
+                  <div className='flex flex-col py-2 pl-3 pr-20'>
+                    <button className='py-2 px-3 hover:text-orange text-left'>English</button>
+                    <button className='py-2 px-3 hover:text-orange mt-2 text-left'>Tiếng Việt</button>
+                  </div>
+                </div>
+              }
             >
               <svg
                 xmlns='http://www.w3.org/2000/svg'
@@ -66,84 +46,38 @@ const Header = () => {
               >
                 <path strokeLinecap='round' strokeLinejoin='round' d='m19.5 8.25-7.5 7.5-7.5-7.5' />
               </svg>
+            </Popover>
 
-              <FloatingPortal>
-                <AnimatePresence>
-                  {isOpen && (
-                    <motion.div
-                      ref={refs.setFloating}
-                      style={{
-                        ...floatingStyles,
-                        position: strategy,
-                        top: y ?? 0,
-                        left: x ?? 0,
-                        transformOrigin: `${middlewareData.arrow?.x}px top`
-                      }}
-                      initial={{ opacity: 0, transform: 'scale(0)' }}
-                      animate={{ opacity: 1, transform: 'scale(1)' }}
-                      exit={{ opacity: 0, transform: 'scale(0)' }}
-                      transition={{ duration: 0.2 }}
-                    >
-                      <div
-                        ref={arrowRef}
-                        style={{
-                          position: 'absolute',
-                          left: middlewareData.arrow?.x,
-                          top: middlewareData.arrow?.y
-                        }}
-                        className='border-x-transparent border-t-transparent border-b-white border-[11px] translate-y-[-94%] z-[1]'
-                      />
-
-                      <div className='bg-white relative shadow-md rounded-sm border border-gray-200'>
-                        <div className='flex flex-col py-2 px-3'>
-                          <button className='py-2 px-3 hover:text-orange'>English</button>
-                          <button className='py-2 px-3 hover:text-orange mt-2'>Tiếng Việt</button>
-                        </div>
-                      </div>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-              </FloatingPortal>
-            </div>
-
-            {/* {isOpen && (
-              <FloatingPortal>
-                <AnimatePresence>
-                  <motion.div
-                    ref={refs.setFloating}
-                    style={floatingStyles}
-                    initial={{ opacity: 0, transform: 'scale(0)' }}
-                    animate={{ opacity: 1, transform: 'scale(1)' }}
-                    exit={{ opacity: 0, transform: 'scale(0)' }}
+            <Popover
+              className='flex items-center py-1 hover:text-gray-300 cursor-pointer ml-6'
+              renderPopover={
+                <div className='bg-white relative shadow-md rounded-sm border border-gray-200'>
+                  <Link
+                    to='/'
+                    className='block py-3 px-4 hover:bg-slate-100 bg-white hover:text-cyan-500 w-full text-left'
                   >
-                    <div
-                      ref={arrowRef}
-                      style={{
-                        position: 'absolute',
-                        left: middlewareData.arrow?.x,
-                        top: middlewareData.arrow?.y
-                      }}
-                      className='border-x-transparent border-t-transparent border-b-white border-[11px] translate-y-[-94%] z-[1]'
-                    />
+                    My account
+                  </Link>
 
-                    <div className='bg-white relative shadow-md rounded-sm border border-gray-200'>
-                      <div className='flex flex-col py-2 px-3'>
-                        <button className='py-2 px-3 hover:text-orange'>English</button>
-                        <button className='py-2 px-3 hover:text-orange mt-2'>Tiếng Việt</button>
-                      </div>
-                    </div>
-                  </motion.div>
-                </AnimatePresence>
-              </FloatingPortal>
-            )} */}
+                  <Link
+                    to='/'
+                    className='block py-3 px-4 hover:bg-slate-100 bg-white hover:text-cyan-500 w-full text-left'
+                  >
+                    My orders
+                  </Link>
 
-            <div className='flex items-center py-1 hover:text-gray-300 cursor-pointer ml-6'>
+                  <button className='block py-3 px-4 hover:bg-slate-100 bg-white hover:text-cyan-500 w-full text-left'>
+                    Logout
+                  </button>
+                </div>
+              }
+            >
               <div className='w-6 h-6 mr-2 flex-shrink-0'>
                 <img src='avatar.svg' alt='Avatar' className='w-full h-full object-cover rounded-full' />
               </div>
 
               <div>pv1805</div>
-            </div>
+            </Popover>
           </div>
 
           <div className='grid grid-cols-12 gap-4 mt-4 items-end'>
