@@ -1,7 +1,24 @@
 import { Link } from 'react-router-dom'
 import Popover from '../Popover'
+import { useMutation } from '@tanstack/react-query'
+import { logout } from '../../apis/auth.api'
+import { useContext } from 'react'
+import { AppContext } from '../../contexts/app.context'
 
 const Header = () => {
+  const { isAuthenticated, setIsAuthenticated } = useContext(AppContext)
+
+  const logoutMutation = useMutation({
+    mutationFn: () => logout(),
+    onSuccess: () => {
+      setIsAuthenticated(false)
+    }
+  })
+
+  const handleLogout = () => {
+    logoutMutation.mutate()
+  }
+
   return (
     <>
       <div className='pb-5 pt-2 bg-gradient-to-r from-[#f53d2d] to-[#f63] text-white'>
@@ -48,36 +65,55 @@ const Header = () => {
               </svg>
             </Popover>
 
-            <Popover
-              className='flex items-center py-1 hover:text-gray-300 cursor-pointer ml-6'
-              renderPopover={
-                <div className='bg-white relative shadow-md rounded-sm border border-gray-200'>
-                  <Link
-                    to='/profile'
-                    className='block py-3 px-4 hover:bg-slate-100 bg-white hover:text-cyan-500 w-full text-left'
-                  >
-                    My account
-                  </Link>
+            {isAuthenticated && (
+              <Popover
+                className='flex items-center py-1 hover:text-gray-300 cursor-pointer ml-6'
+                renderPopover={
+                  <div className='bg-white relative shadow-md rounded-sm border border-gray-200'>
+                    <Link
+                      to='/profile'
+                      className='block py-3 px-4 hover:bg-slate-100 bg-white hover:text-cyan-500 w-full text-left'
+                    >
+                      My account
+                    </Link>
 
-                  <Link
-                    to='/'
-                    className='block py-3 px-4 hover:bg-slate-100 bg-white hover:text-cyan-500 w-full text-left'
-                  >
-                    My orders
-                  </Link>
+                    <Link
+                      to='/'
+                      className='block py-3 px-4 hover:bg-slate-100 bg-white hover:text-cyan-500 w-full text-left'
+                    >
+                      My orders
+                    </Link>
 
-                  <button className='block py-3 px-4 hover:bg-slate-100 bg-white hover:text-cyan-500 w-full text-left'>
-                    Logout
-                  </button>
+                    <button
+                      onClick={handleLogout}
+                      className='block py-3 px-4 hover:bg-slate-100 bg-white hover:text-cyan-500 w-full text-left'
+                    >
+                      Logout
+                    </button>
+                  </div>
+                }
+              >
+                <div className='w-6 h-6 mr-2 flex-shrink-0'>
+                  <img src='avatar.svg' alt='Avatar' className='w-full h-full object-cover rounded-full' />
                 </div>
-              }
-            >
-              <div className='w-6 h-6 mr-2 flex-shrink-0'>
-                <img src='avatar.svg' alt='Avatar' className='w-full h-full object-cover rounded-full' />
-              </div>
 
-              <div>pv1805</div>
-            </Popover>
+                <div>pv1805</div>
+              </Popover>
+            )}
+
+            {!isAuthenticated && (
+              <div className='flex items-center'>
+                <Link to='/register' className='mx-3 capitalize hover:text-white/70 '>
+                  Register
+                </Link>
+
+                <div className='border-r-[1px] border-r-white/40 h-4' />
+
+                <Link to='/login' className='mx-3 capitalize hover:text-white/70 '>
+                  Login
+                </Link>
+              </div>
+            )}
           </div>
 
           <div className='grid grid-cols-12 gap-4 mt-4 items-end'>
