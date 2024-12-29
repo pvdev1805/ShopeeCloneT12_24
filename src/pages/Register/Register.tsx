@@ -10,6 +10,7 @@ import { isAxiosUnprocessableEntityError } from '../../utils/utils'
 import { ErrorResponse } from '../../types/utils.type'
 import { useContext } from 'react'
 import { AppContext } from '../../contexts/app.context'
+import Button from '../../components/Button'
 
 type FormData = Schema
 
@@ -120,12 +121,14 @@ const Register = () => {
                 />
 
                 <div className='mt-2'>
-                  <button
+                  <Button
                     type='submit'
-                    className='w-full text-center py-4 px-2 uppercase bg-red-500 text-white text-sm hover:bg-red-600'
+                    className='w-full text-center py-4 px-2 uppercase bg-red-500 text-white text-sm hover:bg-red-600 flex justify-center items-center'
+                    isLoading={registerAccountMutation.isPending}
+                    disabled={registerAccountMutation.isPending}
                   >
                     Sign Up
-                  </button>
+                  </Button>
                 </div>
 
                 <div className='mt-8'>
