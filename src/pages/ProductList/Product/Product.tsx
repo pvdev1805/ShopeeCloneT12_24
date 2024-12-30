@@ -1,29 +1,33 @@
 import { Link } from 'react-router-dom'
+import { Product as ProductType } from '../../../types/product.type'
+import { formatCurrency, formatNumberToSocialStyle } from '../../../utils/utils'
 
-const Product = () => {
+interface Props {
+  product: ProductType
+}
+
+const Product = ({ product }: Props) => {
   return (
     <>
       <Link to='/'>
         <div className='bg-white shadow rounded-sm hover:translate-y-[-0.04rem] hover:shadow-md duration-100 transition-transform overflow-hidden'>
           <div className='w-full pt-[100%] relative'>
             <img
-              src='https://cf.shopee.vn/file/ea0f159f3f4c713abcf56b5ba73840b9_tn'
-              alt=''
+              src={product.image}
+              alt={product.name}
               className='absolute top-0 left-0 bg-white w-full h-full object-cover'
             />
           </div>
           <div className='p-2 overflow-hidden'>
-            <div className='min-h-[2rem] line-clamp-2 text-xs'>
-              Men's Premium Leather Belt with Automatic Buckle, Korean Style - v77men
-            </div>
+            <div className='min-h-[2rem] line-clamp-2 text-xs'>{product.name}</div>
             <div className='flex items-center mt-3'>
               <div className='line-through max-w-[50%] text-gray-500 truncate'>
                 <span className='text-xs'>$</span>
-                <span>18.00</span>
+                <span>{formatCurrency(product.price_before_discount)}</span>
               </div>
               <div className='text-orange truncate ml-1'>
                 <span className='text-xs'>$</span>
-                <span>15.00</span>
+                <span>{formatCurrency(product.price)} </span>
               </div>
             </div>
             <div className='mt-3 flex items-center justify-end'>
@@ -62,7 +66,7 @@ const Product = () => {
                 </div>
               </div>
               <div className='ml-2 text-sm'>
-                <span>5.66k</span>
+                <span>{formatNumberToSocialStyle(product.sold)} </span>
                 <span className='ml-1'>Sold</span>
               </div>
             </div>
