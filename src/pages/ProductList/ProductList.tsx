@@ -55,7 +55,7 @@ const ProductList = () => {
               </div>
 
               <div className='col-span-9'>
-                <SortProductList />
+                <SortProductList queryConfig={queryConfig} pageSize={data.data.data.pagination.page_size} />
 
                 <div className='mt-6 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3'>
                   {data.data.data.products.map((product) => (
