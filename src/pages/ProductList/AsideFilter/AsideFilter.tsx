@@ -1,20 +1,67 @@
-import { createSearchParams, Link } from 'react-router-dom'
+import { createSearchParams, Link, useNavigate } from 'react-router-dom'
 import path from '../../../constants/path'
 import Input from '../../../components/Input'
 import Button from '../../../components/Button'
 import { QueryConfig } from '../ProductList'
 import { Category } from '../../../types/category.type'
 import classNames from 'classnames'
+import InputNumber from '../../../components/InputNumber'
+import { useForm, Controller } from 'react-hook-form'
+import { Schema, schema } from '../../../utils/rules'
+import { yupResolver } from '@hookform/resolvers/yup'
+import { NoUndefinedField } from '../../../types/utils.type'
+import RatingStars from '../RatingStars'
+import { omit } from 'lodash'
 
 interface Props {
   queryConfig: QueryConfig
   categories: Category[]
 }
 
+type FormData = NoUndefinedField<Pick<Schema, 'price_max' | 'price_min'>>
+
+const priceSchema = schema.pick(['price_min', 'price_max'])
+
 const AsideFilter = ({ queryConfig, categories }: Props) => {
   const { category } = queryConfig
 
-  console.log(category, categories)
+  const {
+    control,
+    handleSubmit,
+    watch,
+    trigger,
+    formState: { errors }
+  } = useForm<FormData>({
+    defaultValues: {
+      price_min: '',
+      price_max: ''
+    },
+    resolver: yupResolver(priceSchema)
+  })
+
+  // console.log(category, categories)
+
+  const navigate = useNavigate()
+
+  const onSubmit = handleSubmit((data) => {
+    // console.log(data);
+
+    navigate({
+      pathname: path.home,
+      search: createSearchParams({
+        ...queryConfig,
+        price_max: data.price_max,
+        price_min: data.price_min
+      }).toString()
+    })
+  })
+
+  const handleRemoveAll = () => {
+    navigate({
+      pathname: path.home,
+      search: createSearchParams(omit(queryConfig, ['price_min', 'price_max', 'rating_filter', 'category'])).toString()
+    })
+  }
 
   return (
     <>
@@ -100,24 +147,55 @@ const AsideFilter = ({ queryConfig, categories }: Props) => {
         <div className='my-5'>
           <div>Price Range</div>
 
-          <form className='mt-2'>
+          <form className='mt-2' onSubmit={onSubmit}>
             <div className='flex items-start'>
-              <Input
-                type='text'
-                className='grow'
-                name='from'
-                placeholder='From'
-                classNameInput='p-1 w-full outline-none border border-gray-300 focus:border-gray-500 rounded-sm focus:shadow-sm'
+              <Controller
+                control={control}
+                name='price_min'
+                render={({ field }) => {
+                  return (
+                    <InputNumber
+                      type='text'
+                      className='grow'
+                      placeholder='From'
+                      classNameInput='p-1 w-full outline-none border border-gray-300 focus:border-gray-500 rounded-sm focus:shadow-sm'
+                      classNameError='hidden'
+                      {...field}
+                      onChange={(event) => {
+                        field.onChange(event)
+                        trigger('price_max')
+                      }}
+                    />
+                  )
+                }}
               />
+
               <div className='mx-2 mt-2 shrink-0'>-</div>
-              <Input
-                type='text'
-                className='grow'
-                name='from'
-                placeholder='To'
-                classNameInput='p-1 w-full outline-none border border-gray-300 focus:border-gray-500 rounded-sm focus:shadow-sm'
+
+              <Controller
+                control={control}
+                name='price_max'
+                render={({ field }) => {
+                  return (
+                    <InputNumber
+                      type='text'
+                      className='grow'
+                      placeholder='To'
+                      classNameInput='p-1 w-full outline-none border border-gray-300 focus:border-gray-500 rounded-sm focus:shadow-sm'
+                      classNameError='hidden'
+                      {...field}
+                      onChange={(event) => {
+                        field.onChange(event)
+                        trigger('price_min')
+                      }}
+                    />
+                  )
+                }}
               />
             </div>
+
+            <div className='mt-1 text-red-600 min-h-[1.25rem] text-sm'>{errors.price_min?.message}</div>
+
             <Button className='w-full p-2 uppercase bg-orange text-white text-sm hover:bg-orange/80 flex justify-center items-center'>
               Apply
             </Button>
@@ -128,82 +206,14 @@ const AsideFilter = ({ queryConfig, categories }: Props) => {
 
         <div className='text-sm'>Rating</div>
 
-        <ul className='my-3'>
-          <li className='py-1 pl-2'>
-            <Link to='' className='flex items-center text-sm'>
-              {Array(5)
-                .fill(0)
-                .map((_, index) => (
-                  <svg viewBox='0 0 9.5 8' className='w-4 h-4 mr-1' key={index}>
-                    <defs>
-                      <linearGradient id='ratingStarGradient' x1='50%' x2='50%' y1='0%' y2='100%'>
-                        <stop offset={0} stopColor='#ffca11' />
-                        <stop offset={1} stopColor='#ffad27' />
-                      </linearGradient>
-                      <polygon
-                        id='ratingStar'
-                        points='14.910357 6.35294118 12.4209136 7.66171903 12.896355 4.88968305 10.8823529 2.92651626 13.6656353 2.52208166 14.910357 0 16.1550787 2.52208166 18.9383611 2.92651626 16.924359 4.88968305 17.3998004 7.66171903'
-                      />
-                    </defs>
-                    <g fill='url(#ratingStarGradient)' fillRule='evenodd' stroke='none' strokeWidth={1}>
-                      <g transform='translate(-876 -1270)'>
-                        <g transform='translate(155 992)'>
-                          <g transform='translate(600 29)'>
-                            <g transform='translate(10 239)'>
-                              <g transform='translate(101 10)'>
-                                <use stroke='#ffa727' strokeWidth='.5' xlinkHref='#ratingStar' />
-                              </g>
-                            </g>
-                          </g>
-                        </g>
-                      </g>
-                    </g>
-                  </svg>
-                ))}
-
-              <span>And Above</span>
-            </Link>
-          </li>
-          <li className='py-1 pl-2'>
-            <Link to='' className='flex items-center text-sm'>
-              {Array(5)
-                .fill(0)
-                .map((_, index) => (
-                  <svg viewBox='0 0 9.5 8' className='w-4 h-4 mr-1' key={index}>
-                    <defs>
-                      <linearGradient id='ratingStarGradient' x1='50%' x2='50%' y1='0%' y2='100%'>
-                        <stop offset={0} stopColor='#ffca11' />
-                        <stop offset={1} stopColor='#ffad27' />
-                      </linearGradient>
-                      <polygon
-                        id='ratingStar'
-                        points='14.910357 6.35294118 12.4209136 7.66171903 12.896355 4.88968305 10.8823529 2.92651626 13.6656353 2.52208166 14.910357 0 16.1550787 2.52208166 18.9383611 2.92651626 16.924359 4.88968305 17.3998004 7.66171903'
-                      />
-                    </defs>
-                    <g fill='url(#ratingStarGradient)' fillRule='evenodd' stroke='none' strokeWidth={1}>
-                      <g transform='translate(-876 -1270)'>
-                        <g transform='translate(155 992)'>
-                          <g transform='translate(600 29)'>
-                            <g transform='translate(10 239)'>
-                              <g transform='translate(101 10)'>
-                                <use stroke='#ffa727' strokeWidth='.5' xlinkHref='#ratingStar' />
-                              </g>
-                            </g>
-                          </g>
-                        </g>
-                      </g>
-                    </g>
-                  </svg>
-                ))}
-
-              <span>And Above</span>
-            </Link>
-          </li>
-        </ul>
+        <RatingStars queryConfig={queryConfig} />
 
         <div className='bg-gray-300 h-[1px] my-4' />
 
-        <Button className='w-full p-2 uppercase bg-orange text-white text-sm hover:bg-orange/80 flex justify-center items-center'>
+        <Button
+          className='w-full p-2 uppercase bg-orange text-white text-sm hover:bg-orange/80 flex justify-center items-center'
+          onClick={handleRemoveAll}
+        >
           Clear Filter
         </Button>
       </div>
