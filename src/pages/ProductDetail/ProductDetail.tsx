@@ -3,13 +3,15 @@ import { useParams } from 'react-router-dom'
 import DOMPurify from 'dompurify'
 import productApi from '../../apis/product.api'
 import ProductRating from '../../components/ProductRating'
-import { formatCurrency, formatNumberToSocialStyle, rateSale } from '../../utils/utils'
+import { formatCurrency, formatNumberToSocialStyle, getIdFromNameId, rateSale } from '../../utils/utils'
 import InputNumber from '../../components/InputNumber'
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { Product } from '../../types/product.type'
 
 const ProductDetail = () => {
-  const { id } = useParams()
+  const { nameId } = useParams()
+
+  const id = getIdFromNameId(nameId as string)
 
   const { data: productDetailData } = useQuery({
     queryKey: ['product', id],
