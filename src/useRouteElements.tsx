@@ -60,7 +60,6 @@ const useRouteElements = () => {
     },
     {
       path: path.productDetail,
-      index: true,
       element: (
         <MainLayout>
           <ProductDetail />
