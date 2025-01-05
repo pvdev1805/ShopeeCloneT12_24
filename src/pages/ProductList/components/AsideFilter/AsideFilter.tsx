@@ -95,7 +95,7 @@ const AsideFilter = ({ queryConfig, categories }: Props) => {
             const isActive = category === categoryItem._id
 
             return (
-              <li className='py-2 li-2' key={categoryItem._id}>
+              <li className='py-2 pl-2' key={categoryItem._id}>
                 <Link
                   to={{
                     pathname: path.home,

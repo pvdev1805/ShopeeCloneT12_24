@@ -14,6 +14,7 @@ import { purchasesStatus } from '../../constants/purchase'
 import purchaseApi from '../../apis/purchase.api'
 import noProducts from '../../assets/images/no-product.png'
 import { formatCurrency } from '../../utils/utils'
+import { queryClient } from '../../main'
 
 type FormData = Pick<Schema, 'name'>
 
@@ -42,12 +43,14 @@ const Header = () => {
     onSuccess: () => {
       setIsAuthenticated(false)
       setProfile(null)
+      queryClient.removeQueries({ queryKey: ['purchases', { status: purchasesStatus.inCart }] })
     }
   })
 
   const { data: purchasesInCartData } = useQuery({
     queryKey: ['purchases', { status: purchasesStatus.inCart }],
-    queryFn: () => purchaseApi.getPurchases({ status: purchasesStatus.inCart })
+    queryFn: () => purchaseApi.getPurchases({ status: purchasesStatus.inCart }),
+    enabled: isAuthenticated
   })
 
   const purchasesInCart = purchasesInCartData?.data.data
@@ -240,13 +243,16 @@ const Header = () => {
                             to cart
                           </div>
 
-                          <button className='py-2 px-4 bg-orange hover:bg-opacity-90 rounded-sm text-white capitalize'>
+                          <Link
+                            to={path.cart}
+                            className='py-2 px-4 bg-orange hover:bg-opacity-90 rounded-sm text-white capitalize'
+                          >
                             View cart
-                          </button>
+                          </Link>
                         </div>
                       </div>
                     ) : (
-                      <div className='p-2 flex h-[300px] w-[300px] items-center justify-center'>
+                      <div className='p-2 flex h-[300px] w-[300px] items-center justify-center flex-col'>
                         <img src={noProducts} alt='no-purchase' className='size-24' />
                         <div className='mt-3 capitalize'>No products in cart</div>
                       </div>
@@ -270,9 +276,11 @@ const Header = () => {
                     />
                   </svg>
 
-                  <span className='absolute top-[-5px] left-[17px] rounded-full bg-white px-[9px] py-[1px] text-xs text-orange '>
-                    {purchasesInCart?.length}
-                  </span>
+                  {isAuthenticated && (
+                    <span className='absolute top-[-5px] left-[17px] rounded-full bg-white px-[9px] py-[1px] text-xs text-orange '>
+                      {purchasesInCart?.length}
+                    </span>
+                  )}
                 </Link>
               </Popover>
             </div>
