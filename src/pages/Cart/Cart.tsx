@@ -195,7 +195,7 @@ const Cart = () => {
 
                               <div className='flex-grow px-2 pt-1 pb-2'>
                                 <Link
-                                  className='line-clamp-2'
+                                  className='text-left line-clamp-2'
                                   to={`${path.home}${generateNameId({
                                     name: purchase.product.name,
                                     id: purchase.product._id
