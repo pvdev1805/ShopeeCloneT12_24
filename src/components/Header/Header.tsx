@@ -25,6 +25,8 @@ const Header = () => {
 
   const purchasesInCart = purchasesInCartData?.data.data
 
+  console.log(purchasesInCart)
+
   return (
     <>
       <div className='pb-5 pt-2 bg-gradient-to-r from-[#f53d2d] to-[#f63] text-white'>
@@ -72,7 +74,7 @@ const Header = () => {
               <Popover
                 renderPopover={
                   <div className='bg-white relative shadow-md rounded-sm border border-gray-200 max-w-[400px] text-sm'>
-                    {purchasesInCart ? (
+                    {purchasesInCart && purchasesInCart.length > 0 ? (
                       <div className='p-2'>
                         <div className='text-gray-400 capitalize'>Recently added products</div>
 
@@ -139,7 +141,7 @@ const Header = () => {
                     />
                   </svg>
 
-                  {isAuthenticated && (
+                  {purchasesInCart && purchasesInCart.length > 0 && (
                     <span className='absolute top-[-5px] left-[17px] rounded-full bg-white px-[9px] py-[1px] text-xs text-orange '>
                       {purchasesInCart?.length}
                     </span>

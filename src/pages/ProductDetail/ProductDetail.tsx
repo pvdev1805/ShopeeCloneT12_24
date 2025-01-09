@@ -1,10 +1,9 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import DOMPurify from 'dompurify'
 import productApi from '../../apis/product.api'
 import ProductRating from '../../components/ProductRating'
 import { formatCurrency, formatNumberToSocialStyle, getIdFromNameId, rateSale } from '../../utils/utils'
-import InputNumber from '../../components/InputNumber'
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { ProductListConfig, Product as ProductType } from '../../types/product.type'
 import Product from '../ProductList/components/Product'
@@ -12,6 +11,7 @@ import QuantityController from '../../components/QuantityController'
 import purchaseApi from '../../apis/purchase.api'
 import { purchasesStatus } from '../../constants/purchase'
 import { toast } from 'react-toastify'
+import path from '../../constants/path'
 
 const ProductDetail = () => {
   const queryClient = useQueryClient()
@@ -30,6 +30,8 @@ const ProductDetail = () => {
   const addToCartMutation = useMutation({
     mutationFn: purchaseApi.addToCart
   })
+
+  const navigate = useNavigate()
 
   const [currentIndexImages, setCurrentIndexImages] = useState([0, 5])
 
@@ -122,6 +124,21 @@ const ProductDetail = () => {
         }
       }
     )
+  }
+
+  const buyNow = async () => {
+    const res = await addToCartMutation.mutateAsync({
+      product_id: product?._id as string,
+      buy_count: buyCount
+    })
+
+    const purchase = res.data.data
+
+    navigate(path.cart, {
+      state: {
+        purchaseId: purchase._id
+      }
+    })
   }
 
   if (!product) return null
@@ -281,7 +298,10 @@ const ProductDetail = () => {
                     Add to Cart
                   </button>
 
-                  <button className='flex ml-4 h-12 min-w-[5rem] items-center justify-center rounded-sm bg-orange px-5 capitalize text-white shadow-sm outline-none hover:bg-orange/90'>
+                  <button
+                    onClick={buyNow}
+                    className='flex ml-4 h-12 min-w-[5rem] items-center justify-center rounded-sm bg-orange px-5 capitalize text-white shadow-sm outline-none hover:bg-orange/90'
+                  >
                     Buy Now
                   </button>
                 </div>
