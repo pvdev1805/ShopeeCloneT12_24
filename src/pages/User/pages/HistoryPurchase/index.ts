@@ -1,3 +1,3 @@
-import HistoryPurchase from './PurchaseHistory'
+import HistoryPurchase from './HistoryPurchase'
 
 export default HistoryPurchase
