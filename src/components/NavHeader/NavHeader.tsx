@@ -98,7 +98,7 @@ const NavHeader = () => {
             }
           >
             <div className='w-6 h-6 mr-2 flex-shrink-0'>
-              <img src='avatar.svg' alt='Avatar' className='w-full h-full object-cover rounded-full' />
+              <img src='/avatar.svg' alt='Avatar' className='w-full h-full object-cover rounded-full' />
             </div>
 
             <div>{profile?.email}</div>

@@ -25,8 +25,6 @@ const Header = () => {
 
   const purchasesInCart = purchasesInCartData?.data.data
 
-  console.log(purchasesInCart)
-
   return (
     <>
       <div className='pb-5 pt-2 bg-gradient-to-r from-[#f53d2d] to-[#f63] text-white'>
