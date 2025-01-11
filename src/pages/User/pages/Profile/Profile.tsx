@@ -22,21 +22,21 @@ const Profile = () => {
             <div className='mt-6 flex flex-col flex-wrap sm:flex-row'>
               <div className='truncate pt-3 capitalize sm:w-[20%] sm:text-right'>Name</div>
               <div className='sm:w-[80%] sm:pl-5'>
-                <Input classNameInput='w-full rounded-sm border- border-gray-300 px-3 py-2 outline-none focus:border-gray-500 focus:shadow-sm' />
+                <Input classNameInput='w-full rounded-sm border border-gray-300 px-3 py-2 outline-none focus:border-gray-500 focus:shadow-sm' />
               </div>
             </div>
 
             <div className='mt-2 flex flex-col flex-wrap sm:flex-row'>
               <div className='truncate pt-3 capitalize sm:w-[20%] sm:text-right'>Phone</div>
               <div className='sm:w-[80%] sm:pl-5'>
-                <Input classNameInput='w-full rounded-sm border- border-gray-300 px-3 py-2 outline-none focus:border-gray-500 focus:shadow-sm' />
+                <Input classNameInput='w-full rounded-sm border border-gray-300 px-3 py-2 outline-none focus:border-gray-500 focus:shadow-sm' />
               </div>
             </div>
 
             <div className='mt-2 flex flex-col flex-wrap sm:flex-row'>
               <div className='truncate pt-3 capitalize sm:w-[20%] sm:text-right'>Email</div>
               <div className='sm:w-[80%] sm:pl-5'>
-                <Input classNameInput='w-full rounded-sm border- border-gray-300 px-3 py-2 outline-none focus:border-gray-500 focus:shadow-sm' />
+                <Input classNameInput='w-full rounded-sm border border-gray-300 px-3 py-2 outline-none focus:border-gray-500 focus:shadow-sm' />
               </div>
             </div>
 
