@@ -6,22 +6,30 @@ import { userSchema, UserSchema } from '../../../../utils/rules'
 import { Controller, useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import InputNumber from '../../../../components/InputNumber'
-import { useEffect } from 'react'
+import { useContext, useEffect } from 'react'
 import DateSelect from '../../components/DateSelect'
+import { toast } from 'react-toastify'
+import { AppContext } from '../../../../contexts/app.context'
+import { setProfileToLS } from '../../../../utils/auth'
+import userImage from '../../../../assets/images/avatar.svg'
 
 type FormData = Pick<UserSchema, 'name' | 'address' | 'phone' | 'avatar' | 'date_of_birth'>
 
 const profileSchema = userSchema.pick(['name', 'address', 'phone', 'avatar', 'date_of_birth'])
 
 const Profile = () => {
-  const { data: profileData } = useQuery({
+  const { setProfile } = useContext(AppContext)
+
+  const { data: profileData, refetch } = useQuery({
     queryKey: ['profile'],
     queryFn: userApi.getProfile
   })
 
   const profile = profileData?.data.data
 
-  const updateProfileMutation = useMutation(userApi.updateProfile)
+  const updateProfileMutation = useMutation({
+    mutationFn: userApi.updateProfile
+  })
 
   const {
     register,
@@ -54,7 +62,11 @@ const Profile = () => {
 
   const onSubmit = handleSubmit(async (data) => {
     console.log(data)
-    // await updateProfileMutation.mutateAsync({})
+    const res = await updateProfileMutation.mutateAsync({ ...data, date_of_birth: data.date_of_birth?.toISOString() })
+    setProfile(res.data.data)
+    setProfileToLS(res.data.data)
+    refetch()
+    toast.success(res.data.message)
   })
 
   const value = watch()
@@ -140,7 +152,7 @@ const Profile = () => {
               <div className='sm:w-[80%] sm:pl-5'>
                 <Button
                   type='submit'
-                  className='flex items-center h-9 bg-orange px-5 text-center text-sm text-white hover:bg-orange/80'
+                  className='flex items-center rounded-sm h-9 bg-orange px-5 text-center text-sm text-white hover:bg-orange/80'
                 >
                   Save
                 </Button>
@@ -151,7 +163,11 @@ const Profile = () => {
           <div className='flex justify-center md:w-72 md:border-l md:border-l-gray-200'>
             <div className='flex flex-col items-center'>
               <div className='my-5 h-24 w-24'>
-                <img src='/avatar.svg' alt='Avatar' className='w-full h-full rounded-full object-cover' />
+                <img
+                  src={profile?.avatar || userImage}
+                  alt='Avatar'
+                  className='w-full h-full rounded-full object-cover'
+                />
               </div>
 
               <input type='file' accept='.jpg,.jpeg,.png' className='hidden' />

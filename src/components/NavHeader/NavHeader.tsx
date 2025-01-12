@@ -6,6 +6,7 @@ import { purchasesStatus } from '../../constants/purchase'
 import Popover from '../Popover'
 import { Link } from 'react-router-dom'
 import path from '../../constants/path'
+import userImage from '../../assets/images/avatar.svg'
 
 const NavHeader = () => {
   const { isAuthenticated, setIsAuthenticated, profile, setProfile } = useContext(AppContext)
@@ -24,6 +25,8 @@ const NavHeader = () => {
   const handleLogout = () => {
     logoutMutation.mutate()
   }
+
+  console.log(profile)
 
   return (
     <>
@@ -98,7 +101,11 @@ const NavHeader = () => {
             }
           >
             <div className='w-6 h-6 mr-2 flex-shrink-0'>
-              <img src='/avatar.svg' alt='Avatar' className='w-full h-full object-cover rounded-full' />
+              <img
+                src={profile?.avatar || userImage}
+                alt='Avatar'
+                className='w-full h-full object-cover rounded-full'
+              />
             </div>
 
             <div>{profile?.email}</div>

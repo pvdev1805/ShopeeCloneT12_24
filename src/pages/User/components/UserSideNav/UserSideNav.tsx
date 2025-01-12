@@ -1,7 +1,12 @@
 import { Link } from 'react-router-dom'
 import path from '../../../../constants/path'
+import { useContext } from 'react'
+import { AppContext } from '../../../../contexts/app.context'
+import userImage from '../../../../assets/images/avatar.svg'
 
 const UserSideNav = () => {
+  const { profile } = useContext(AppContext)
+
   return (
     <>
       <div>
@@ -10,11 +15,11 @@ const UserSideNav = () => {
             to={path.profile}
             className='h-12 w-12 flex-shrink-0 overflow-hidden rounded-full border border-black/10'
           >
-            <img src='/avatar.svg' alt='Avatar' className='h-full w-full object-cover' />
+            <img src={profile?.avatar || userImage} alt='Avatar' className='h-full w-full object-cover' />
           </Link>
 
           <div className='flex-grow pl-4'>
-            <div className='mb-1 truncate font-semibold text-gray-600'>pvdev1805</div>
+            <div className='mb-1 truncate font-semibold text-gray-600'>{profile?.email}</div>
             <Link to={path.profile} className='flex items-center capitalize text-gray-500'>
               <svg
                 width={12}
