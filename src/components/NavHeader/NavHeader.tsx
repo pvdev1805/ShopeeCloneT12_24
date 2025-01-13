@@ -6,7 +6,7 @@ import { purchasesStatus } from '../../constants/purchase'
 import Popover from '../Popover'
 import { Link } from 'react-router-dom'
 import path from '../../constants/path'
-import userImage from '../../assets/images/avatar.svg'
+import { getAvatarUrl } from '../../utils/utils'
 
 const NavHeader = () => {
   const { isAuthenticated, setIsAuthenticated, profile, setProfile } = useContext(AppContext)
@@ -102,7 +102,7 @@ const NavHeader = () => {
           >
             <div className='w-6 h-6 mr-2 flex-shrink-0'>
               <img
-                src={profile?.avatar || userImage}
+                src={getAvatarUrl(profile?.avatar)}
                 alt='Avatar'
                 className='w-full h-full object-cover rounded-full'
               />

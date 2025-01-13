@@ -6,19 +6,32 @@ import { userSchema, UserSchema } from '../../../../utils/rules'
 import { Controller, useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import InputNumber from '../../../../components/InputNumber'
-import { useContext, useEffect } from 'react'
+import { useContext, useEffect, useMemo, useRef, useState } from 'react'
 import DateSelect from '../../components/DateSelect'
 import { toast } from 'react-toastify'
 import { AppContext } from '../../../../contexts/app.context'
 import { setProfileToLS } from '../../../../utils/auth'
-import userImage from '../../../../assets/images/avatar.svg'
+import { getAvatarUrl, isAxiosUnprocessableEntityError } from '../../../../utils/utils'
+import { ErrorResponse } from '../../../../types/utils.type'
 
 type FormData = Pick<UserSchema, 'name' | 'address' | 'phone' | 'avatar' | 'date_of_birth'>
+
+type FormDataError = Omit<FormData, 'date_of_birth'> & {
+  date_of_birth?: string
+}
 
 const profileSchema = userSchema.pick(['name', 'address', 'phone', 'avatar', 'date_of_birth'])
 
 const Profile = () => {
+  const fileInputRef = useRef<HTMLInputElement>(null)
+
   const { setProfile } = useContext(AppContext)
+
+  const [file, setFile] = useState<File>()
+
+  const previewImage = useMemo(() => {
+    return file ? URL.createObjectURL(file) : ''
+  }, [file])
 
   const { data: profileData, refetch } = useQuery({
     queryKey: ['profile'],
@@ -29,6 +42,10 @@ const Profile = () => {
 
   const updateProfileMutation = useMutation({
     mutationFn: userApi.updateProfile
+  })
+
+  const uploadAvatarMutation = useMutation({
+    mutationFn: userApi.uploadAvatar
   })
 
   const {
@@ -50,6 +67,8 @@ const Profile = () => {
     resolver: yupResolver(profileSchema)
   })
 
+  const avatar = watch('avatar')
+
   useEffect(() => {
     if (profile) {
       setValue('name', profile.name)
@@ -62,15 +81,56 @@ const Profile = () => {
 
   const onSubmit = handleSubmit(async (data) => {
     console.log(data)
-    const res = await updateProfileMutation.mutateAsync({ ...data, date_of_birth: data.date_of_birth?.toISOString() })
-    setProfile(res.data.data)
-    setProfileToLS(res.data.data)
-    refetch()
-    toast.success(res.data.message)
+
+    try {
+      let avatarName = avatar
+      if (file) {
+        const form = new FormData()
+
+        form.append('image', file)
+        const uploadRes = await uploadAvatarMutation.mutateAsync(form)
+        // console.log(uploadRes.data.data)
+        avatarName = uploadRes.data.data
+        setValue('avatar', avatarName)
+      }
+
+      const res = await updateProfileMutation.mutateAsync({
+        ...data,
+        date_of_birth: data.date_of_birth?.toISOString(),
+        avatar: avatarName
+      })
+      setProfile(res.data.data)
+      setProfileToLS(res.data.data)
+      refetch()
+      toast.success(res.data.message)
+    } catch (error) {
+      // console.log(error)
+      if (isAxiosUnprocessableEntityError<ErrorResponse<FormDataError>>(error)) {
+        const formError = error.response?.data.data
+
+        if (formError) {
+          Object.keys(formError).forEach((key) => {
+            setError(key as keyof FormDataError, {
+              message: formError[key as keyof FormDataError],
+              type: 'Server'
+            })
+          })
+        }
+      }
+    }
   })
 
-  const value = watch()
-  console.log(value, errors)
+  // const value = watch()
+  // console.log(value, errors)
+
+  const onFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const fileFromLocal = event.target.files?.[0]
+    setFile(fileFromLocal)
+  }
+
+  const handleUpload = () => {
+    fileInputRef.current?.click()
+  }
 
   return (
     <>
@@ -164,17 +224,24 @@ const Profile = () => {
             <div className='flex flex-col items-center'>
               <div className='my-5 h-24 w-24'>
                 <img
-                  src={profile?.avatar || userImage}
+                  src={previewImage || getAvatarUrl(avatar)}
                   alt='Avatar'
                   className='w-full h-full rounded-full object-cover'
                 />
               </div>
 
-              <input type='file' accept='.jpg,.jpeg,.png' className='hidden' />
+              <input
+                type='file'
+                accept='.jpg,.jpeg,.png'
+                className='hidden'
+                ref={fileInputRef}
+                onChange={onFileChange}
+              />
 
               <button
                 type='button'
                 className='flex h-10 items-center justify-end rounded-sm border bg-white px-6 text-sm text-gray-600 shadow-sm'
+                onClick={handleUpload}
               >
                 Change avatar
               </button>
