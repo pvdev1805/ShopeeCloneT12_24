@@ -13,6 +13,7 @@ import { AppContext } from '../../../../contexts/app.context'
 import { setProfileToLS } from '../../../../utils/auth'
 import { getAvatarUrl, isAxiosUnprocessableEntityError } from '../../../../utils/utils'
 import { ErrorResponse } from '../../../../types/utils.type'
+import config from '../../../../constants/config'
 
 type FormData = Pick<UserSchema, 'name' | 'address' | 'phone' | 'avatar' | 'date_of_birth'>
 
@@ -125,7 +126,15 @@ const Profile = () => {
 
   const onFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const fileFromLocal = event.target.files?.[0]
-    setFile(fileFromLocal)
+
+    fileInputRef.current?.setAttribute('value', '')
+    if (fileFromLocal && (fileFromLocal.size >= config.maxSizeUploadAvatar || !fileFromLocal.type.includes('image'))) {
+      toast.error(`Maximum file size: 1MB\nFormat: .jpg, .jpeg, .png`, {
+        position: 'top-center'
+      })
+    } else {
+      setFile(fileFromLocal)
+    }
   }
 
   const handleUpload = () => {
@@ -236,6 +245,10 @@ const Profile = () => {
                 className='hidden'
                 ref={fileInputRef}
                 onChange={onFileChange}
+                onClick={(event) => {
+                  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                  ;(event.target as any).value = null
+                }}
               />
 
               <button
