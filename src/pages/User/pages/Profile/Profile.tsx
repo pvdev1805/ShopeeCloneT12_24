@@ -171,7 +171,7 @@ const Profile = () => {
 
   return (
     <>
-      <div className='bg-white rounded-sm px-7 pb-20 shadow'>
+      <div className='bg-white rounded-sm px-2 pb-10 md:px-7 md:pb-20 shadow'>
         <div className='border-b border-b-gray-200 py-6'>
           <h1 className='text-lg font-medium capitalize text-gray-900'>My profile</h1>
 
