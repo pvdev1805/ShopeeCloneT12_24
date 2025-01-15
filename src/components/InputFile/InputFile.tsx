@@ -18,7 +18,7 @@ const InputFile = ({ onChange }: Props) => {
         position: 'top-center'
       })
     } else {
-      onChange && onChange(fileFromLocal)
+      onChange && onChange(fileFromLocal as File)
     }
   }
 

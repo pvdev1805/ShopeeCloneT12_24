@@ -23,9 +23,9 @@ const Register = () => {
   const {
     register,
     handleSubmit,
-    watch,
+    // watch,
     setError,
-    getValues,
+    // getValues,
     formState: { errors }
   } = useForm<FormData>({
     resolver: yupResolver(loginSchema)

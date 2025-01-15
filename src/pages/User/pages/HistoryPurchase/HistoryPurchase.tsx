@@ -30,6 +30,7 @@ const HistoryPurchase = () => {
 
   const purchaseTabsLink = purchaseTabs.map((tab) => (
     <Link
+      key={tab.status}
       to={{
         pathname: path.historyPurchase,
         search: createSearchParams({

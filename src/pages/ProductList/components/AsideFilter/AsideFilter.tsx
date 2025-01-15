@@ -11,6 +11,7 @@ import { NoUndefinedField } from '../../../../types/utils.type'
 import RatingStars from '../RatingStars'
 import { omit } from 'lodash'
 import { QueryConfig } from '../../../../hooks/useQueryConfig'
+import { ObjectSchema } from 'yup'
 // import InputV2 from '../../../../components/InputV2'
 
 interface Props {
@@ -28,7 +29,7 @@ const AsideFilter = ({ queryConfig, categories }: Props) => {
   const {
     control,
     handleSubmit,
-    watch,
+    // watch,
     trigger,
     formState: { errors }
   } = useForm<FormData>({
@@ -36,7 +37,7 @@ const AsideFilter = ({ queryConfig, categories }: Props) => {
       price_min: '',
       price_max: ''
     },
-    resolver: yupResolver(priceSchema)
+    resolver: yupResolver<FormData>(priceSchema as ObjectSchema<FormData>)
   })
 
   // console.log(category, categories)
