@@ -6,7 +6,7 @@ import { userSchema, UserSchema } from '../../../../utils/rules'
 import { useMutation } from '@tanstack/react-query'
 import userApi from '../../../../apis/user.api'
 import { toast } from 'react-toastify'
-import { omit } from 'lodash'
+import omit from 'lodash/omit'
 import { isAxiosUnprocessableEntityError } from '../../../../utils/utils'
 import { ErrorResponse } from '../../../../types/utils.type'
 
