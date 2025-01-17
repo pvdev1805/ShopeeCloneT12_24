@@ -12,6 +12,7 @@ import RatingStars from '../RatingStars'
 import omit from 'lodash/omit'
 import { QueryConfig } from '../../../../hooks/useQueryConfig'
 import { ObjectSchema } from 'yup'
+import { useTranslation } from 'react-i18next'
 // import InputV2 from '../../../../components/InputV2'
 
 interface Props {
@@ -24,6 +25,7 @@ type FormData = NoUndefinedField<Pick<Schema, 'price_max' | 'price_min'>>
 const priceSchema = schema.pick(['price_min', 'price_max'])
 
 const AsideFilter = ({ queryConfig, categories }: Props) => {
+  const { t } = useTranslation('home')
   const { category } = queryConfig
 
   const {
@@ -86,7 +88,7 @@ const AsideFilter = ({ queryConfig, categories }: Props) => {
               </g>
             </g>
           </svg>
-          All Categories
+          {t('aside filter.all categories')}
         </Link>
 
         <div className='bg-gray-300 h-[1px] my-4' />
@@ -140,7 +142,7 @@ const AsideFilter = ({ queryConfig, categories }: Props) => {
               />
             </g>
           </svg>
-          Search Filter
+          {t('aside filter.filter search')}
         </Link>
 
         <div className='bg-gray-300 h-[1px] my-4' />

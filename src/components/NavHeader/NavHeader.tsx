@@ -7,8 +7,13 @@ import Popover from '../Popover'
 import { Link } from 'react-router-dom'
 import path from '../../constants/path'
 import { getAvatarUrl } from '../../utils/utils'
+import { useTranslation } from 'react-i18next'
+import { locales } from '../../i18n/i18n'
 
 const NavHeader = () => {
+  const { i18n } = useTranslation()
+  const currentLanguage = locales[i18n.language as keyof typeof locales]
+
   const { isAuthenticated, setIsAuthenticated, profile, setProfile } = useContext(AppContext)
 
   const queryClient = useQueryClient()
@@ -26,6 +31,10 @@ const NavHeader = () => {
     logoutMutation.mutate()
   }
 
+  const changeLanguage = (lng: string) => {
+    i18n.changeLanguage(lng)
+  }
+
   console.log(profile)
 
   return (
@@ -37,8 +46,12 @@ const NavHeader = () => {
           renderPopover={
             <div className='bg-white relative shadow-md rounded-sm border border-gray-200'>
               <div className='flex flex-col py-2 pl-3 pr-20'>
-                <button className='py-2 px-3 hover:text-orange text-left'>English</button>
-                <button className='py-2 px-3 hover:text-orange mt-2 text-left'>Tiếng Việt</button>
+                <button className='py-2 px-3 hover:text-orange text-left' onClick={() => changeLanguage('en')}>
+                  English
+                </button>
+                <button className='py-2 px-3 hover:text-orange mt-2 text-left' onClick={() => changeLanguage('vi')}>
+                  Tiếng Việt
+                </button>
               </div>
             </div>
           }
@@ -58,7 +71,7 @@ const NavHeader = () => {
             />
           </svg>
 
-          <span className='mx-1'>English</span>
+          <span className='mx-1'>{currentLanguage}</span>
 
           <svg
             xmlns='http://www.w3.org/2000/svg'
