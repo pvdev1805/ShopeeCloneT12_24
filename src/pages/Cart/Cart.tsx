@@ -13,6 +13,7 @@ import keyBy from 'lodash/keyBy'
 import { toast } from 'react-toastify'
 import { AppContext } from '../../contexts/app.context'
 import noProducts from '../../assets/images/no-product.png'
+import { Helmet } from 'react-helmet-async'
 
 const Cart = () => {
   const { extendedPurchases, setExtendedPurchases } = useContext(AppContext)
@@ -154,6 +155,11 @@ const Cart = () => {
   return (
     <>
       <div className='bg-neutral-100 py-16'>
+        <Helmet>
+          <title>Cart | Shopee Clone</title>
+          <meta name='description' content='Cart of the Shopee Clone project' />
+        </Helmet>
+
         <div className='container'>
           {extendedPurchases.length > 0 ? (
             <div className='overflow-auto'>

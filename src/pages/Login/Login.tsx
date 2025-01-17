@@ -10,6 +10,7 @@ import Input from '../../components/Input'
 import { useContext } from 'react'
 import { AppContext } from '../../contexts/app.context'
 import Button from '../../components/Button'
+import { Helmet } from 'react-helmet-async'
 
 type FormData = Pick<Schema, 'email' | 'password'>
 const loginSchema = schema.pick(['email', 'password'])
@@ -65,6 +66,11 @@ const Login = () => {
   return (
     <>
       <div className='bg-orange'>
+        <Helmet>
+          <title>Login | Shopee Clone</title>
+          <meta name='description' content='Login to Shopee Clone project' />
+        </Helmet>
+
         <div className='container'>
           <div className='grid grid-cols-1 lg:grid-cols-5 py-12 lg:py-32 lg:pr-10'>
             <div className='lg:col-span-2 lg:col-start-4'>
