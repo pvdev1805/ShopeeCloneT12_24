@@ -107,6 +107,7 @@ const Register = () => {
                   register={register}
                   type='password'
                   className='mt-2'
+                  classNameEye='absolute right-[5px] h-5 w-5 cursor-pointer top-[12px]'
                   placeholder='Password'
                   errorMessage={errors.password?.message}
                   autoComplete='on'
@@ -117,6 +118,7 @@ const Register = () => {
                   register={register}
                   type='password'
                   className='mt-2'
+                  classNameEye='absolute right-[5px] h-5 w-5 cursor-pointer top-[12px]'
                   placeholder='Confirm Password'
                   errorMessage={errors.confirm_password?.message}
                   autoComplete='on'

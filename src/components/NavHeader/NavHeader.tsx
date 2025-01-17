@@ -85,7 +85,7 @@ const NavHeader = () => {
                 </Link>
 
                 <Link
-                  to='/'
+                  to={path.historyPurchase}
                   className='block py-3 px-4 hover:bg-slate-100 bg-white hover:text-cyan-500 w-full text-left'
                 >
                   My orders

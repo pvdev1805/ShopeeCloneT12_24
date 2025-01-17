@@ -2,6 +2,7 @@ import axios, { AxiosError } from 'axios'
 import HttpStatusCode from '../constants/httpStatusCode.enum'
 import config from '../constants/config'
 import userImage from '../assets/images/avatar.svg'
+import { ErrorResponse } from '../types/utils.type'
 
 export const isAxiosError = <T>(error: unknown): error is AxiosError<T> => {
   return axios.isAxiosError(error)
@@ -9,6 +10,21 @@ export const isAxiosError = <T>(error: unknown): error is AxiosError<T> => {
 
 export const isAxiosUnprocessableEntityError = <FormError>(error: unknown): error is AxiosError<FormError> => {
   return isAxiosError(error) && error.response?.status === HttpStatusCode.UnprocessableEntity
+}
+
+export const isAxiosUnauthorizedError = <UnauthorizedFormError>(
+  error: unknown
+): error is AxiosError<UnauthorizedFormError> => {
+  return isAxiosError(error) && error.response?.status === HttpStatusCode.Unauthorized
+}
+
+export const isAxiosExpiredTokenError = <UnauthorizedFormError>(
+  error: unknown
+): error is AxiosError<UnauthorizedFormError> => {
+  return (
+    isAxiosUnauthorizedError<ErrorResponse<{ name: string; message: string }>>(error) &&
+    error.response?.data?.data?.name === 'EXPIRED_TOKEN'
+  )
 }
 
 export const formatCurrency = (currency: number) => {
