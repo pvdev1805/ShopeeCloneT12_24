@@ -5,6 +5,8 @@ declare module 'i18next' {
   // Inheritance (Add to type)
   interface CustomTypeOptions {
     defaultNS: typeof defaultNS
-    resources: (typeof resources)['en']
+
+    // prettier-ignore
+    resources: typeof resources['en']
   }
 }
