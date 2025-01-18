@@ -15,7 +15,7 @@ import { URL_LOGIN, URL_LOGOUT, URL_REFRESH_TOKEN, URL_REGISTER } from '../apis/
 import { isAxiosExpiredTokenError, isAxiosUnauthorizedError } from './utils'
 import { ErrorResponse } from '../types/utils.type'
 
-class Http {
+export class Http {
   instance: AxiosInstance
 
   private accessToken: string
