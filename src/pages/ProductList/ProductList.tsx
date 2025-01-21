@@ -38,7 +38,7 @@ const ProductList = () => {
     <>
       <div className='bg-gray-200 py-6'>
         <Helmet>
-          <title>Homepage | Shopee</title>
+          <title>Homepage | Shopee Clone</title>
           <meta name='description' content='Homepage of the Shopee Clone project' />
         </Helmet>
 
