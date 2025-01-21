@@ -3,7 +3,8 @@ import { render, screen, waitFor } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import '@testing-library/jest-dom/vitest'
 import App from './App'
-import { BrowserRouter } from 'react-router-dom'
+import { BrowserRouter, MemoryRouter } from 'react-router-dom'
+import { logScreen } from './utils/testUtils'
 
 describe('App', () => {
   test('App renders and redirects to other page', async () => {
@@ -37,6 +38,23 @@ describe('App', () => {
     // )
 
     // Log
-    screen.debug(document.body.parentElement as HTMLElement, 999999)
+    // screen.debug(document.body.parentElement as HTMLElement, 999999)
+  })
+
+  test('Redirect to Page Not Found', async () => {
+    const badRoute = '/some/bad/route'
+    render(
+      <MemoryRouter initialEntries={[badRoute]}>
+        <App />
+      </MemoryRouter>
+    )
+
+    await waitFor(() => {
+      expect(screen.getByText(/Page Not Found/i)).toBeInTheDocument()
+    })
+
+    // screen.debug(document.body.parentElement as HTMLElement, 999999)
+
+    await logScreen()
   })
 })
