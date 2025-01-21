@@ -1,20 +1,12 @@
 import { describe, expect, test } from 'vitest'
-import { render, screen, waitFor } from '@testing-library/react'
-import userEvent from '@testing-library/user-event'
+import { screen, waitFor } from '@testing-library/react'
 import '@testing-library/jest-dom/vitest'
-import App from './App'
-import { BrowserRouter, MemoryRouter } from 'react-router-dom'
-import { logScreen } from './utils/testUtils'
+import { logScreen, renderWithRouter } from './utils/testUtils'
+import path from './constants/path'
 
 describe('App', () => {
   test('App renders and redirects to other page', async () => {
-    render(
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
-    )
-
-    const user = userEvent.setup()
+    const { user } = renderWithRouter()
 
     // Verify: redirect to the correct homepage
     await waitFor(() => {
@@ -43,17 +35,23 @@ describe('App', () => {
 
   test('Redirect to Page Not Found', async () => {
     const badRoute = '/some/bad/route'
-    render(
-      <MemoryRouter initialEntries={[badRoute]}>
-        <App />
-      </MemoryRouter>
-    )
+
+    renderWithRouter({ route: badRoute })
 
     await waitFor(() => {
       expect(screen.getByText(/Page Not Found/i)).toBeInTheDocument()
     })
 
     // screen.debug(document.body.parentElement as HTMLElement, 999999)
+
+    // await logScreen()
+  })
+
+  test('Render the register page', async () => {
+    renderWithRouter({ route: path.register })
+    await waitFor(() => {
+      expect(screen.getByText(/Already have an account?/i)).toBeInTheDocument()
+    })
 
     await logScreen()
   })
