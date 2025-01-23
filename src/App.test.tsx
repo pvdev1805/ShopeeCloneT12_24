@@ -1,7 +1,7 @@
 import { describe, expect, test } from 'vitest'
 import { screen, waitFor } from '@testing-library/react'
 import '@testing-library/jest-dom/vitest'
-import { logScreen, renderWithRouter } from './utils/testUtils'
+import { renderWithRouter } from './utils/testUtils'
 import path from './constants/path'
 
 describe('App', () => {
@@ -43,8 +43,6 @@ describe('App', () => {
     })
 
     // screen.debug(document.body.parentElement as HTMLElement, 999999)
-
-    // await logScreen()
   })
 
   test('Render the register page', async () => {
@@ -52,7 +50,5 @@ describe('App', () => {
     await waitFor(() => {
       expect(screen.getByText(/Already have an account?/i)).toBeInTheDocument()
     })
-
-    await logScreen()
   })
 })

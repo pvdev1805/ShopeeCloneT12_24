@@ -5,6 +5,7 @@ import { expect } from 'vitest'
 import App from '../App'
 import { BrowserRouter } from 'react-router-dom'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import { AppProvider, getInitialAppContext } from '../contexts/app.context'
 
 const delay = (time: number) =>
   new Promise((resolve) => {
@@ -51,11 +52,16 @@ const Provider = createWrapper()
 
 export const renderWithRouter = ({ route = '/' } = {}) => {
   window.history.pushState({}, 'Test page', route)
+
+  const defaultValueAppContext = getInitialAppContext()
+
   return {
     user: userEvent.setup(),
     ...render(
       <Provider>
-        <App />
+        <AppProvider defaultValue={defaultValueAppContext}>
+          <App />
+        </AppProvider>
       </Provider>,
       { wrapper: BrowserRouter }
     )

@@ -1,5 +1,5 @@
 import { beforeAll, describe, expect, it } from 'vitest'
-import { logScreen, renderWithRouter } from '../../utils/testUtils'
+import { renderWithRouter } from '../../utils/testUtils'
 import path from '../../constants/path'
 import { fireEvent, screen, waitFor } from '@testing-library/react'
 import '@testing-library/jest-dom/vitest'
@@ -27,8 +27,6 @@ describe('Login', () => {
       expect(screen.queryByText('Email is required')).toBeTruthy()
       expect(screen.queryByText('Password is required')).toBeTruthy()
     })
-
-    // await logScreen()
   })
 
   it('Display error message when user enters wrong pattern in format of input value', async () => {
@@ -48,19 +46,17 @@ describe('Login', () => {
       expect(screen.queryByText('Invalid email format')).toBeTruthy()
       expect(screen.queryByText('Must be between 5 and 160 characters long')).toBeTruthy()
     })
-
-    // await logScreen()
   })
 
   it('Do not display error message when user enters correct pattern in format of input value', async () => {
     fireEvent.change(emailInput, {
       target: {
-        value: 'test@mail.com'
+        value: 'd3@gmail.com'
       }
     })
     fireEvent.change(passwordInput, {
       target: {
-        value: '123456'
+        value: 'useruser'
       }
     })
 
@@ -69,8 +65,6 @@ describe('Login', () => {
       expect(screen.queryByText('Must be between 5 and 160 characters long')).toBeFalsy()
     })
     fireEvent.submit(submitButton)
-
-    await logScreen()
 
     await waitFor(() => {
       expect(document.querySelector('title')?.textContent).toBe('Login | Shopee Clone')
