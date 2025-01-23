@@ -1,0 +1,33 @@
+{
+  "cart heading": "Cart",
+  "cart info": {
+    "product title": "Product",
+    "price title": "Price",
+    "quantity title": "Quantity",
+    "total title": "Total",
+    "action title": "Action"
+  },
+  "cart status": {
+    "empty": "Your cart is empty"
+  },
+  "product": {
+    "price": "Price",
+    "quantity": "Quantity",
+    "total": "Total",
+    "action": {
+      "delete": "Delete"
+    }
+  },
+  "order": {
+    "total amount": "Total amount",
+    "saving": "Saving",
+    "action": {
+      "checkout": "Checkout",
+      "select all": "Select all",
+      "delete": "Delete",
+      "buy now": "Buy now"
+    },
+    "products": "products",
+    "free ship deal": "Free shipping for orders from $0"
+  }
+}

@@ -1,6 +1,40 @@
 {
+  "actions": {
+    "login": "Đăng nhập",
+    "register": "Đăng ký"
+  },
   "aside filter": {
     "all categories": "Tất cả danh mục",
-    "filter search": "Bộ lọc tìm kiếm"
+    "filter search": "Bộ lọc tìm kiếm",
+    "categories": {
+      "Áo thun": "Áo thun",
+      "Đồng hồ": "Đồng hồ",
+      "Điện thoại": "Điện thoại"
+    },
+    "price range": "Khoảng giá",
+    "price": {
+      "from": "Từ",
+      "to": "Đến"
+    },
+    "apply filter": "Áp dụng",
+    "rating": "Đánh giá",
+    "and above": "Trở lên",
+    "clear filter": "Xóa bộ lọc"
+  },
+  "sort": {
+    "sort by": "Sắp xếp theo",
+    "popularity": "Phổ biến",
+    "new arrivals": "Mới nhất",
+    "best sellers": "Bán chạy",
+    "price order": "Giá",
+    "price sort": {
+      "low to high": "Thấp đến cao",
+      "high to low": "Cao đến thấp"
+    }
+  },
+  "profile": {
+    "my account": "Tài khoản của tôi",
+    "my orders": "Đơn hàng của tôi",
+    "logout": "Đăng xuất"
   }
 }

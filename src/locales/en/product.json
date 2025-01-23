@@ -1,3 +1,21 @@
 {
-  "available": "Available Products"
+  "available": "Available Products",
+  "no products in cart": "No products in cart",
+  "recently added products": "Recently Added Products",
+  "free ship deal": "Free shipping for orders from $0",
+  "add to cart title": "Add to cart",
+  "product": {
+    "product description": "Product Description",
+    "status": {
+      "sold": "Sold",
+      "off": "Off"
+    },
+    "quantity": "Quantity",
+    "related products": "You may also like"
+  },
+  "action": {
+    "add to cart": "Add to cart",
+    "buy now": "Buy now",
+    "view cart": "View Cart"
+  }
 }

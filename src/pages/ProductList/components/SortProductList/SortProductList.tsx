@@ -5,6 +5,7 @@ import { createSearchParams, Link, useNavigate } from 'react-router-dom'
 import { QueryConfig } from '../../../../hooks/useQueryConfig'
 import path from '../../../../constants/path'
 import omit from 'lodash/omit'
+import { useTranslation } from 'react-i18next'
 
 interface Props {
   queryConfig: QueryConfig
@@ -12,6 +13,8 @@ interface Props {
 }
 
 const SortProductList = ({ queryConfig, pageSize }: Props) => {
+  const { t } = useTranslation('home')
+
   const page = Number(queryConfig.page)
 
   const { sort_by = sortBy.createdAt, order } = queryConfig
@@ -53,7 +56,7 @@ const SortProductList = ({ queryConfig, pageSize }: Props) => {
       <div className='bg-gray-300/40 py-4 px-3'>
         <div className='flex flex-wrap items-center justify-between gap-2'>
           <div className='flex items-center flex-wrap gap-2'>
-            <div>Sort By</div>
+            <div>{t('sort.sort by')}</div>
             <button
               className={classNames('h-8 px-4 capitalize text-sm text-center', {
                 'bg-orange text-white hover:bg-orange/80': isActiveSortBy(sortBy.view),
@@ -61,7 +64,7 @@ const SortProductList = ({ queryConfig, pageSize }: Props) => {
               })}
               onClick={() => handleSort(sortBy.view)}
             >
-              Popularity
+              {t('sort.popularity')}
             </button>
             <button
               className={classNames('h-8 px-4 capitalize text-sm text-center', {
@@ -70,7 +73,7 @@ const SortProductList = ({ queryConfig, pageSize }: Props) => {
               })}
               onClick={() => handleSort(sortBy.createdAt)}
             >
-              New Arrival
+              {t('sort.new arrivals')}
             </button>
             <button
               className={classNames('h-8 px-4 capitalize text-sm text-center', {
@@ -79,7 +82,7 @@ const SortProductList = ({ queryConfig, pageSize }: Props) => {
               })}
               onClick={() => handleSort(sortBy.sold)}
             >
-              Best Seller
+              {t('sort.best sellers')}
             </button>
             <select
               className={classNames('h-8 px-4 capitalize text-sm text-left outline-none', {
@@ -92,13 +95,13 @@ const SortProductList = ({ queryConfig, pageSize }: Props) => {
               }
             >
               <option value='' disabled className='bg-white text-black'>
-                Price
+                {t('sort.price order')}
               </option>
               <option value={OrderConstant.asc} className='bg-white text-black'>
-                Price: Ascending Order
+                {t('sort.price order')}: {t('sort.price sort.low to high')}
               </option>
               <option value={OrderConstant.desc} className='bg-white text-black'>
-                Price: Descending Order
+                {t('sort.price order')}: {t('sort.price sort.high to low')}
               </option>
             </select>
           </div>

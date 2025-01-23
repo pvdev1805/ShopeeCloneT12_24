@@ -1,3 +1,21 @@
 {
-  "available": "Sản phẩm có sẵn"
+  "available": "Sản phẩm có sẵn",
+  "no products in cart": "Không có sản phẩm nào trong giỏ hàng",
+  "recently added products": "Sản phẩm đã thêm",
+  "free ship deal": "Miễn phí vận chuyển cho đơn hàng từ $0",
+  "add to cart title": "Thêm vào giỏ hàng",
+  "product": {
+    "product description": "Mô tả sản phẩm",
+    "status": {
+      "sold": "Đã bán",
+      "off": "Giảm"
+    },
+    "quantity": "Số lượng",
+    "related products": "Các sản phẩm liên quan khác"
+  },
+  "action": {
+    "add to cart": "Thêm vào giỏ hàng",
+    "buy now": "Mua ngay",
+    "view cart": "Xem giỏ hàng"
+  }
 }

@@ -14,8 +14,11 @@ import { toast } from 'react-toastify'
 import { AppContext } from '../../contexts/app.context'
 import noProducts from '../../assets/images/no-product.png'
 import { Helmet } from 'react-helmet-async'
+import { useTranslation } from 'react-i18next'
 
 const Cart = () => {
+  const { t } = useTranslation('cart')
+
   const { extendedPurchases, setExtendedPurchases } = useContext(AppContext)
 
   const { data: purchasesInCartData, refetch } = useQuery({
@@ -176,16 +179,16 @@ const Cart = () => {
                         />
                       </div>
 
-                      <div className='flex-grow text-black'>Product</div>
+                      <div className='flex-grow text-black'>{t('cart info.product title')}</div>
                     </div>
                   </div>
 
                   <div className='col-span-6'>
                     <div className='grid grid-cols-5 text-center'>
-                      <div className='col-span-2'>Price</div>
-                      <div className='col-span-1'>Quantity</div>
-                      <div className='col-span-1'>Total</div>
-                      <div className='col-span-1'>Action</div>
+                      <div className='col-span-2'>{t('cart info.price title')}</div>
+                      <div className='col-span-1'>{t('cart info.quantity title')}</div>
+                      <div className='col-span-1'>{t('cart info.total title')}</div>
+                      <div className='col-span-1'>{t('cart info.action title')}</div>
                     </div>
                   </div>
                 </div>
@@ -280,7 +283,7 @@ const Cart = () => {
                                 onClick={handleDelete(index)}
                                 className='bg-none text-black transition-colors hover:text-orange'
                               >
-                                Delete
+                                {t('product.action.delete')}
                               </button>
                             </div>
                           </div>
@@ -294,14 +297,14 @@ const Cart = () => {
           ) : (
             <div className='text-center'>
               <img src={noProducts} alt='no-purchase' className='mx-auto size-24' />
-              <div className='mt-5 font-bold text-gray-400'>Your cart is empty</div>
+              <div className='mt-5 font-bold text-gray-400'>{t('cart status.empty')}</div>
 
               <div className='mt-5 text-center'>
                 <Link
                   to={path.home}
                   className=' rounded-sm bg-orange px-10 py-2  uppercase text-white transition-all hover:bg-orange/80'
                 >
-                  Buy now
+                  {t('order.action.buy now')}
                 </Link>
               </div>
             </div>
@@ -319,24 +322,26 @@ const Cart = () => {
               </div>
 
               <button className='mx-3 border-none bg-none' onClick={handleCheckAll}>
-                Select All ({extendedPurchases.length})
+                {t('order.action.select all')} ({extendedPurchases.length})
               </button>
 
               <button className='mx-3 border-none bg-none' onClick={handleDeleteManyPurchases}>
-                Delete
+                {t('order.action.delete')}
               </button>
             </div>
 
             <div className='mt-5 flex flex-col sm:ml-auto sm:mt-0 sm:flex-row sm:items-center'>
               <div>
                 <div className='flex items-center sm:justify-end'>
-                  <div>Total amount ({checkedPurchasesCount} products):</div>
+                  <div>
+                    {t('order.total amount')} ({checkedPurchasesCount} {t('order.products')}):
+                  </div>
 
                   <div className='ml-2 text-2xl text-orange'>${formatCurrency(totalCheckedPurchasePrice)}</div>
                 </div>
 
                 <div className='flex items-center text-sm sm:justify-end'>
-                  <div className='text-gray-500'>Saving: </div>
+                  <div className='text-gray-500'>{t('order.saving')}: </div>
                   <div className='ml-6 text-orange'>${formatCurrency(totalCheckedPurchaseSavingPrice)}</div>
                 </div>
               </div>
@@ -346,7 +351,7 @@ const Cart = () => {
                 disabled={buyProductsMutation.isPending}
                 className='mt-5 flex h-10 w-52 items-center justify-center bg-red-500 text-sm uppercase text-white hover:bg-red-600 sm:ml-4 sm:mt-0'
               >
-                Checkout
+                {t('order.action.checkout')}
               </Button>
             </div>
           </div>

@@ -1,0 +1,33 @@
+{
+  "cart heading": "Giỏ hàng",
+  "cart info": {
+    "product title": "Sản phẩm",
+    "price title": "Giá",
+    "quantity title": "Số lượng",
+    "total title": "Tổng",
+    "action title": "Thao tác"
+  },
+  "cart status": {
+    "empty": "Giỏ hàng của bạn đang trống"
+  },
+  "product": {
+    "price": "Đơn giá",
+    "quantity": "Số lượng",
+    "total": "Tổng",
+    "action": {
+      "delete": "Xóa"
+    }
+  },
+  "order": {
+    "total amount": "Tổng cộng",
+    "saving": "Tiết kiệm",
+    "action": {
+      "checkout": "Thanh toán",
+      "select all": "Chọn tất cả",
+      "delete": "Xóa",
+      "buy now": "Mua ngay"
+    },
+    "products": "sản phẩm",
+    "free ship deal": "Miễn phí vận chuyển cho đơn hàng từ $0"
+  }
+}

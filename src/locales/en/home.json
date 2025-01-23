@@ -1,6 +1,40 @@
 {
+  "actions": {
+    "login": "Login",
+    "register": "Register"
+  },
   "aside filter": {
     "all categories": "All Categories",
-    "filter search": "Filter By"
+    "filter search": "Filter By",
+    "categories": {
+      "Áo thun": "T-shirt",
+      "Đồng hồ": "Watch",
+      "Điện thoại": "Phone"
+    },
+    "price range": "Price Range",
+    "price": {
+      "from": "From",
+      "to": "To"
+    },
+    "apply filter": "Apply",
+    "rating": "Rating",
+    "and above": "And Above",
+    "clear filter": "Clear Filter"
+  },
+  "sort": {
+    "sort by": "Sort By",
+    "popularity": "Popularity",
+    "new arrivals": "New Arrivals",
+    "best sellers": "Best Sellers",
+    "price order": "Price",
+    "price sort": {
+      "low to high": "Ascending Order",
+      "high to low": "Descending Order"
+    }
+  },
+  "profile": {
+    "my account": "My Account",
+    "my orders": "My Orders",
+    "logout": "Logout"
   }
 }

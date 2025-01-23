@@ -2,8 +2,11 @@ import { Link } from 'react-router-dom'
 import NavHeader from '../NavHeader'
 import path from '../../constants/path'
 import useSearchProducts from '../../hooks/useSearchProducts'
+import { useTranslation } from 'react-i18next'
 
 const CartHeader = () => {
+  const { t } = useTranslation('cart')
+
   const { onSubmitSearch, register } = useSearchProducts()
 
   return (
@@ -29,7 +32,7 @@ const CartHeader = () => {
 
                 <div className='mx-4 h-6 w-[1px] bg-orange md:h-8'></div>
 
-                <div className='capitalize text-orange md:text-xl'>Cart</div>
+                <div className='capitalize text-orange md:text-xl'>{t('cart heading')}</div>
               </Link>
 
               <form className='mt-3 md:mt-0 md:w-[50%]' onSubmit={onSubmitSearch}>
@@ -37,7 +40,7 @@ const CartHeader = () => {
                   <input
                     type='text'
                     className='w-full flex-grow border-none bg-transparent px-3 py-1 text-black outline-none'
-                    placeholder='Free shipping for orders from $0'
+                    placeholder={t('order.free ship deal')}
                     {...register('name')}
                   />
 

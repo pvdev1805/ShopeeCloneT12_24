@@ -164,8 +164,8 @@ const ProductDetail = () => {
 
         <div className='container'>
           <div className='bg-white p-4 shadow'>
-            <div className='grid grid-cols-12 gap-9'>
-              <div className='col-span-5'>
+            <div className='grid grid-cols-12 gap-2 lg:gap-9'>
+              <div className='col-span-12 md:col-span-5'>
                 <div
                   className='relative w-full pt-[100%] shadow cursor-zoom-in overflow-hidden'
                   onMouseMove={handleZoom}
@@ -230,8 +230,8 @@ const ProductDetail = () => {
                 </div>
               </div>
 
-              <div className='col-span-7'>
-                <h1 className='text-xl font-medium uppercase'>{product.name} </h1>
+              <div className='col-span-12 md:col-span-7'>
+                <h1 className='text-lg md:text-xl font-medium uppercase'>{product.name} </h1>
                 <div className='mt-8 flex items-center'>
                   <div className='flex items-center'>
                     <span className='mr-1 border-b border-b-orange text-orange'>{product.rating} </span>
@@ -247,22 +247,24 @@ const ProductDetail = () => {
 
                   <div>
                     <span>{formatNumberToSocialStyle(product.sold)}</span>
-                    <span className='ml-1 text-gray-500'>Sold</span>
+                    <span className='ml-1 text-gray-500'>{t('product:product.status.sold')}</span>
                   </div>
                 </div>
 
                 <div className='mt-8 flex items-center bg-gray-50 px-5 py-4'>
                   <div className='text-gray-500 line-through'>${formatCurrency(product.price_before_discount)} </div>
 
-                  <div className='ml-3 text-3xl font-medium text-orange'>${formatCurrency(product.price)}</div>
+                  <div className='ml-3 text-xl md:text-3xl font-medium text-orange'>
+                    ${formatCurrency(product.price)}
+                  </div>
 
                   <div className='ml-4 rounded-sm bg-orange px-1 py-[2px] text-xs font-semibold uppercase text-white'>
-                    {rateSale(product.price_before_discount, product.price)} OFF
+                    {rateSale(product.price_before_discount, product.price)} {t('product:product.status.off')}
                   </div>
                 </div>
 
                 <div className='mt-8 flex items-center'>
-                  <div className='capitalize text-gray-500'>Quantity</div>
+                  <div className='capitalize text-gray-500'>{t('product:product.quantity')}</div>
 
                   <QuantityController
                     onIncrease={handleBuyCount}
@@ -313,14 +315,14 @@ const ProductDetail = () => {
                         <line fill='none' strokeLinecap='round' strokeMiterlimit={10} x1={9} x2={9} y1='8.5' y2='5.5' />
                       </g>
                     </svg>
-                    Add to Cart
+                    {t('product:action.add to cart')}
                   </button>
 
                   <button
                     onClick={buyNow}
                     className='flex ml-4 h-12 min-w-[5rem] items-center justify-center rounded-sm bg-orange px-5 capitalize text-white shadow-sm outline-none hover:bg-orange/90'
                   >
-                    Buy Now
+                    {t('product:action.buy now')}
                   </button>
                 </div>
               </div>
@@ -331,7 +333,9 @@ const ProductDetail = () => {
         <div className='mt-8'>
           <div className='container'>
             <div className='bg-white p-4 shadow'>
-              <div className='rounded bg-gray-50 p-4 text-lg capitalize text-slate-700'>Product Description</div>
+              <div className='rounded bg-gray-50 p-4 text-lg capitalize text-slate-700'>
+                {t('product.product description')}
+              </div>
 
               <div className='mx-4 mt-12 mb-4 text-sm leading-loose'>
                 <div
@@ -346,7 +350,7 @@ const ProductDetail = () => {
 
         <div className='mt-8'>
           <div className='container'>
-            <div className='uppercase text-gray-400'>YOU MAY ALSO LIKE</div>
+            <div className='uppercase text-gray-400'>{t('product:product.related products')}</div>
 
             {productsData && (
               <div className='mt-6 grid grid-cols-2 gap-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6'>

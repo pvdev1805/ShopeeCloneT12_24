@@ -11,7 +11,7 @@ import { useTranslation } from 'react-i18next'
 import { locales } from '../../i18n/i18n'
 
 const NavHeader = () => {
-  const { i18n } = useTranslation()
+  const { i18n, t } = useTranslation()
   const currentLanguage = locales[i18n.language as keyof typeof locales]
 
   const { isAuthenticated, setIsAuthenticated, profile, setProfile } = useContext(AppContext)
@@ -94,21 +94,21 @@ const NavHeader = () => {
                   to={path.profile}
                   className='block py-3 px-4 hover:bg-slate-100 bg-white hover:text-cyan-500 w-full text-left'
                 >
-                  My account
+                  {t('profile.my account')}
                 </Link>
 
                 <Link
                   to={path.historyPurchase}
                   className='block py-3 px-4 hover:bg-slate-100 bg-white hover:text-cyan-500 w-full text-left'
                 >
-                  My orders
+                  {t('profile.my orders')}
                 </Link>
 
                 <button
                   onClick={handleLogout}
                   className='block py-3 px-4 hover:bg-slate-100 bg-white hover:text-cyan-500 w-full text-left'
                 >
-                  Logout
+                  {t('profile.logout')}
                 </button>
               </div>
             }
@@ -128,13 +128,13 @@ const NavHeader = () => {
         {!isAuthenticated && (
           <div className='flex items-center'>
             <Link to={path.register} className='mx-3 capitalize hover:text-white/70 '>
-              Register
+              {t('actions.register')}
             </Link>
 
             <div className='border-r-[1px] border-r-white/40 h-4' />
 
             <Link to={path.login} className='mx-3 capitalize hover:text-white/70 '>
-              Login
+              {t('actions.login')}
             </Link>
           </div>
         )}

@@ -10,10 +10,13 @@ import noProducts from '../../assets/images/no-product.png'
 import { formatCurrency } from '../../utils/utils'
 import NavHeader from '../NavHeader'
 import useSearchProducts from '../../hooks/useSearchProducts'
+import { useTranslation } from 'react-i18next'
 
 const MAX_PURCHASES = 5
 
 const Header = () => {
+  const { t } = useTranslation('product')
+
   const { isAuthenticated } = useContext(AppContext)
   const { onSubmitSearch, register } = useSearchProducts()
 
@@ -45,7 +48,7 @@ const Header = () => {
                 <input
                   type='text'
                   className='text-black px-3 py-2 flex-grow border-none outline-none bg-transparent'
-                  placeholder='Free shipping for orders from $0'
+                  placeholder={t('free ship deal')}
                   {...register('name')}
                 />
 
@@ -74,7 +77,7 @@ const Header = () => {
                   <div className='bg-white relative shadow-md rounded-sm border border-gray-200 max-w-[400px] text-sm'>
                     {purchasesInCart && purchasesInCart.length > 0 ? (
                       <div className='p-2'>
-                        <div className='text-gray-400 capitalize'>Recently added products</div>
+                        <div className='text-gray-400 capitalize'>{t('recently added products')}</div>
 
                         <div className='mt-5'>
                           {purchasesInCart.slice(0, MAX_PURCHASES).map((purchase) => {
@@ -102,22 +105,22 @@ const Header = () => {
 
                         <div className='mt-6 flex items-center justify-between'>
                           <div className='capitalize text-xs text-gray-500'>
-                            {purchasesInCart.length > MAX_PURCHASES ? purchasesInCart.length - MAX_PURCHASES : ''} Add
-                            to cart
+                            {purchasesInCart.length > MAX_PURCHASES ? purchasesInCart.length - MAX_PURCHASES : ''}{' '}
+                            {t('add to cart title')}
                           </div>
 
                           <Link
                             to={path.cart}
                             className='py-2 px-4 bg-orange hover:bg-opacity-90 rounded-sm text-white capitalize'
                           >
-                            View cart
+                            {t('action.view cart')}
                           </Link>
                         </div>
                       </div>
                     ) : (
                       <div className='p-2 flex h-[300px] w-[300px] items-center justify-center flex-col'>
                         <img src={noProducts} alt='no-purchase' className='size-24' />
-                        <div className='mt-3 capitalize'>No products in cart</div>
+                        <div className='mt-3 capitalize'>{t('no products in cart')}</div>
                       </div>
                     )}
                   </div>

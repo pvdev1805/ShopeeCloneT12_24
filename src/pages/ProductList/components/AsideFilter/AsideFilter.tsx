@@ -99,6 +99,8 @@ const AsideFilter = ({ queryConfig, categories }: Props) => {
           {categories.map((categoryItem) => {
             const isActive = category === categoryItem._id
 
+            const categoryNameTranslation = `aside filter.categories.${categoryItem.name}`
+
             return (
               <li className='py-2 pl-2' key={categoryItem._id}>
                 <Link
@@ -119,7 +121,10 @@ const AsideFilter = ({ queryConfig, categories }: Props) => {
                     </svg>
                   )}
 
-                  {categoryItem.name}
+                  {
+                    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                    t(categoryNameTranslation as any)
+                  }
                 </Link>
               </li>
             )
@@ -150,7 +155,7 @@ const AsideFilter = ({ queryConfig, categories }: Props) => {
         <div className='bg-gray-300 h-[1px] my-4' />
 
         <div className='my-5'>
-          <div>Price Range</div>
+          <div>{t('aside filter.price range')}</div>
 
           <form className='mt-2' onSubmit={onSubmit}>
             <div className='flex items-start'>
@@ -162,7 +167,7 @@ const AsideFilter = ({ queryConfig, categories }: Props) => {
                     <InputNumber
                       type='text'
                       className='grow'
-                      placeholder='From'
+                      placeholder={t('aside filter.price.from')}
                       classNameInput='p-1 w-full outline-none border border-gray-300 focus:border-gray-500 rounded-sm focus:shadow-sm'
                       classNameError='hidden'
                       {...field}
@@ -198,7 +203,7 @@ const AsideFilter = ({ queryConfig, categories }: Props) => {
                     <InputNumber
                       type='text'
                       className='grow'
-                      placeholder='To'
+                      placeholder={t('aside filter.price.to')}
                       classNameInput='p-1 w-full outline-none border border-gray-300 focus:border-gray-500 rounded-sm focus:shadow-sm'
                       classNameError='hidden'
                       {...field}
@@ -215,14 +220,14 @@ const AsideFilter = ({ queryConfig, categories }: Props) => {
             <div className='mt-1 text-red-600 min-h-[1.25rem] text-sm'>{errors.price_min?.message}</div>
 
             <Button className='w-full p-2 uppercase bg-orange text-white text-sm hover:bg-orange/80 flex justify-center items-center'>
-              Apply
+              {t('aside filter.apply filter')}
             </Button>
           </form>
         </div>
 
         <div className='bg-gray-300 h-[1px] my-4' />
 
-        <div className='text-sm'>Rating</div>
+        <div className='text-lg text-gray-700 my-2'>{t('aside filter.rating')}</div>
 
         <RatingStars queryConfig={queryConfig} />
 
@@ -232,7 +237,7 @@ const AsideFilter = ({ queryConfig, categories }: Props) => {
           className='w-full p-2 uppercase bg-orange text-white text-sm hover:bg-orange/80 flex justify-center items-center'
           onClick={handleRemoveAll}
         >
-          Clear Filter
+          {t('aside filter.clear filter')}
         </Button>
       </div>
     </>
