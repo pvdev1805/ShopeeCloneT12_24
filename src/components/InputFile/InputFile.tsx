@@ -1,12 +1,15 @@
 import { useRef } from 'react'
 import { toast } from 'react-toastify'
 import config from '../../constants/config'
+import { useTranslation } from 'react-i18next'
 
 interface Props {
   onChange?: (file: File) => void
 }
 
 const InputFile = ({ onChange }: Props) => {
+  const { t } = useTranslation('user')
+
   const fileInputRef = useRef<HTMLInputElement>(null)
 
   const onFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -45,7 +48,7 @@ const InputFile = ({ onChange }: Props) => {
         className='flex h-10 items-center justify-end rounded-sm border bg-white px-6 text-sm text-gray-600 shadow-sm'
         onClick={handleUpload}
       >
-        Change avatar
+        {t('profile.avatar.title')}
       </button>
     </>
   )

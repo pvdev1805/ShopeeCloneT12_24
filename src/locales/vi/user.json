@@ -1,0 +1,62 @@
+{
+  "edit profile": "Sửa hồ sơ",
+  "pages": {
+    "my account": "Tài khoản của tôi",
+    "change password": "Đổi mật khẩu",
+    "purchase history": "Đơn mua"
+  },
+  "profile": {
+    "title": "Hồ sơ của tôi",
+    "description": "Quản lý thông tin hồ sơ để bảo mật tài khoản.",
+    "labels": {
+      "email": "Email",
+      "name": "Tên",
+      "phone": "Số điện thoại",
+      "address": "Địa chỉ",
+      "date of birth": "Ngày sinh",
+      "date": "Ngày",
+      "month": "Tháng",
+      "year": "Năm"
+    },
+    "placeholders": {
+      "name": "Tên",
+      "phone": "Số điện thoại",
+      "address": "Địa chỉ"
+    },
+    "avatar": {
+      "title": "Chọn ảnh",
+      "maximum file size": "Dung lượng file tối đa",
+      "formats": "Định dạng"
+    }
+  },
+  "change password": {
+    "title": "Đổi mật khẩu",
+    "description": "Để bảo mật tài khoản, vui lòng không chia sẻ mật khẩu với người khác.",
+    "labels": {
+      "current password": "Mật khẩu cũ",
+      "new password": "Mật khẩu mới",
+      "confirm password": "Xác nhận mật khẩu"
+    },
+    "placeholders": {
+      "current password": "Mật khẩu cũ",
+      "new password": "Mật khẩu mới",
+      "confirm password": "Xác nhận mật khẩu"
+    }
+  },
+  "purchase": {
+    "title": "Lịch sử mua hàng",
+    "description": "Quản lý lịch sử mua hàng để theo dõi đơn hàng của bạn.",
+    "status": {
+      "all": "Tất cả",
+      "waiting for confirmation": "Chờ xác nhận",
+      "waiting for getting": "Chờ lấy hàng",
+      "in progress": "Đang xử lý",
+      "delivered": "Đã giao",
+      "cancelled": "Đã hủy"
+    },
+    "total": "Tổng cộng"
+  },
+  "buttons": {
+    "save": "Lưu"
+  }
+}

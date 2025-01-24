@@ -1,0 +1,62 @@
+{
+  "edit profile": "Edit Profile",
+  "pages": {
+    "my account": "My Account",
+    "change password": "My Orders",
+    "purchase history": "Purchase History"
+  },
+  "profile": {
+    "title": "My Profile",
+    "description": "Manage profile information for account security.",
+    "labels": {
+      "email": "Email",
+      "name": "Name",
+      "phone": "Phone",
+      "address": "Address",
+      "date of birth": "Date of Birth",
+      "date": "Date",
+      "month": "Month",
+      "year": "Year"
+    },
+    "placeholders": {
+      "name": "Name",
+      "phone": "Phone",
+      "address": "Address"
+    },
+    "avatar": {
+      "title": "Change Avatar",
+      "maximum file size": "Maximum file size",
+      "formats": "Formats"
+    }
+  },
+  "change password": {
+    "title": "Change Password",
+    "description": "To secure your account, please do not share your password with others.",
+    "labels": {
+      "current password": "Current Password",
+      "new password": "New Password",
+      "confirm password": "Confirm Password"
+    },
+    "placeholders": {
+      "current password": "Current password",
+      "new password": "New password",
+      "confirm password": "Confirm password"
+    }
+  },
+  "purchase": {
+    "title": "Purchase History",
+    "description": "Manage your purchase history to track your orders.",
+    "status": {
+      "all": "all",
+      "waiting for confirmation": "waiting for confirmation",
+      "waiting for getting": "waiting for getting",
+      "in progress": "in progress",
+      "delivered": "delivered",
+      "cancelled": "cancelled"
+    },
+    "total": "Total"
+  },
+  "buttons": {
+    "save": "Save"
+  }
+}

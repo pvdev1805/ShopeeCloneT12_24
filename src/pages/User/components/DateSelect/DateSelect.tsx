@@ -1,5 +1,6 @@
 import range from 'lodash/range'
 import { useEffect, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 
 interface Props {
   onChange?: (value: Date) => void
@@ -8,6 +9,8 @@ interface Props {
 }
 
 const DateSelect = ({ onChange, value, errorMessage }: Props) => {
+  const { t } = useTranslation('user')
+
   const [date, setDate] = useState({
     date: value?.getDate() || 1,
     month: value?.getMonth() || 0,
@@ -40,7 +43,7 @@ const DateSelect = ({ onChange, value, errorMessage }: Props) => {
   return (
     <>
       <div className='mt-2 flex flex-col flex-wrap sm:flex-row'>
-        <div className='truncate pt-3 capitalize sm:w-[20%] sm:text-right'>Date of birth</div>
+        <div className='truncate pt-3 capitalize sm:w-[20%] sm:text-right'>{t('profile.labels.date of birth')}</div>
         <div className='sm:w-[80%] sm:pl-5'>
           <div className='flex justify-between'>
             <select
@@ -49,7 +52,7 @@ const DateSelect = ({ onChange, value, errorMessage }: Props) => {
               className='h-10 w-[32%] rounded-sm border border-black/10 px-3 cursor-pointer hover:border-orange'
               value={value?.getDate() || date.date}
             >
-              <option disabled>Date</option>
+              <option disabled>{t('profile.labels.date')}</option>
               {range(1, 32).map((item) => (
                 <option value={item} key={item}>
                   {item}
@@ -63,7 +66,7 @@ const DateSelect = ({ onChange, value, errorMessage }: Props) => {
               className='h-10 w-[32%] rounded-sm border border-black/10 px-3 cursor-pointer hover:border-orange'
               value={value?.getMonth() || date.month}
             >
-              <option disabled>Month</option>
+              <option disabled>{t('profile.labels.month')}</option>
               {range(0, 12).map((item) => (
                 <option value={item} key={item}>
                   {item + 1}
@@ -77,7 +80,7 @@ const DateSelect = ({ onChange, value, errorMessage }: Props) => {
               className='h-10 w-[32%] rounded-sm border border-black/10 px-3 cursor-pointer hover:border-orange'
               value={value?.getFullYear() || date.year}
             >
-              <option disabled>Year</option>
+              <option disabled>{t('profile.labels.year')}</option>
               {range(1990, new Date().getFullYear() + 1).map((item) => (
                 <option value={item} key={item}>
                   {item}

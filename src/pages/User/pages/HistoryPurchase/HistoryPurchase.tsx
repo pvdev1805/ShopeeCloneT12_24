@@ -7,17 +7,20 @@ import { useQuery } from '@tanstack/react-query'
 import { PurchaseListStatus } from '../../../../types/purchase.type'
 import purchaseApi from '../../../../apis/purchase.api'
 import { formatCurrency, generateNameId } from '../../../../utils/utils'
+import { useTranslation } from 'react-i18next'
 
 const purchaseTabs = [
-  { status: purchasesStatus.all, name: 'All' },
-  { status: purchasesStatus.waitingForConfirmation, name: 'Waiting for Confirmation' },
-  { status: purchasesStatus.waitingForGetting, name: 'Waiting for Getting' },
-  { status: purchasesStatus.inProgress, name: 'In Progress' },
-  { status: purchasesStatus.delivered, name: 'Delivered' },
-  { status: purchasesStatus.cancelled, name: 'Cancelled' }
+  { status: purchasesStatus.all, name: 'all' },
+  { status: purchasesStatus.waitingForConfirmation, name: 'waiting for confirmation' },
+  { status: purchasesStatus.waitingForGetting, name: 'waiting for getting' },
+  { status: purchasesStatus.inProgress, name: 'in progress' },
+  { status: purchasesStatus.delivered, name: 'delivered' },
+  { status: purchasesStatus.cancelled, name: 'cancelled' }
 ]
 
 const HistoryPurchase = () => {
+  const { t } = useTranslation('user')
+
   const queryParams: { status?: string } = useQueryParams()
   const status: number = Number(queryParams.status) || purchasesStatus.all
 
@@ -37,12 +40,15 @@ const HistoryPurchase = () => {
           status: String(tab.status)
         }).toString()
       }}
-      className={classNames('flex flex-1 items-center justify-center border-b-2 bg-white py-4 text-center', {
+      className={classNames('flex flex-1 items-center justify-center border-b-2 bg-white py-4 text-center capitalize', {
         'border-b-orange text-orange': status === tab.status,
         'border-b-black/10 text-gray-900': status !== tab.status
       })}
     >
-      {tab.name}
+      {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        t(`purchase.status.${tab.name}` as any)
+      }
     </Link>
   ))
 
@@ -80,7 +86,7 @@ const HistoryPurchase = () => {
 
                 <div className='flex justify-end'>
                   <div>
-                    <span>Total</span>
+                    <span>{t('purchase.total')}</span>
                     <span className='ml-4 text-xl text-orange'>
                       ${formatCurrency(purchase.product.price * purchase.buy_count)}
                     </span>

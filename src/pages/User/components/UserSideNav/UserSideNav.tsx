@@ -4,8 +4,11 @@ import { useContext } from 'react'
 import { AppContext } from '../../../../contexts/app.context'
 import { getAvatarUrl } from '../../../../utils/utils'
 import classNames from 'classnames'
+import { useTranslation } from 'react-i18next'
 
 const UserSideNav = () => {
+  const { t } = useTranslation('user')
+
   const { profile } = useContext(AppContext)
 
   return (
@@ -35,7 +38,7 @@ const UserSideNav = () => {
                   fillRule='evenodd'
                 />
               </svg>
-              Edit Profile
+              {t('edit profile')}
             </Link>
           </div>
         </div>
@@ -53,7 +56,7 @@ const UserSideNav = () => {
             <div className='mr-3 h-[22px] w-[22px]'>
               <img src='https://cf.shopee.vn/file/ba61750a46794d8847c3f463c5e71cc4' alt='' className='h-full w-full' />
             </div>
-            My account
+            {t('pages.my account')}
           </NavLink>
 
           <NavLink
@@ -68,7 +71,7 @@ const UserSideNav = () => {
             <div className='mr-3 h-[22px] w-[22px]'>
               <img src='https://cf.shopee.vn/file/ba61750a46794d8847c3f463c5e71cc4' alt='' className='h-full w-full' />
             </div>
-            Change password
+            {t('pages.change password')}
           </NavLink>
 
           <NavLink
@@ -83,7 +86,7 @@ const UserSideNav = () => {
             <div className='mr-3 h-[22px] w-[22px]'>
               <img src='https://cf.shopee.vn/file/f0049e9df4e536bc3e7f140d071e9078' alt='' className='h-full w-full' />
             </div>
-            Purchase history
+            {t('pages.purchase history')}
           </NavLink>
         </div>
       </div>

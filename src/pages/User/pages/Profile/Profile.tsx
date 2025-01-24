@@ -14,8 +14,11 @@ import { setProfileToLS } from '../../../../utils/auth'
 import { getAvatarUrl, isAxiosUnprocessableEntityError } from '../../../../utils/utils'
 import { ErrorResponse } from '../../../../types/utils.type'
 import InputFile from '../../../../components/InputFile'
+import { useTranslation } from 'react-i18next'
 
 const Info = () => {
+  const { t } = useTranslation('user')
+
   const {
     register,
     control,
@@ -25,20 +28,20 @@ const Info = () => {
   return (
     <>
       <div className='mt-6 flex flex-col flex-wrap sm:flex-row'>
-        <div className='truncate pt-3 capitalize sm:w-[20%] sm:text-right'>Name</div>
+        <div className='truncate pt-3 capitalize sm:w-[20%] sm:text-right'>{t('profile.labels.name')}</div>
         <div className='sm:w-[80%] sm:pl-5'>
           <Input
             classNameInput='w-full rounded-sm border border-gray-300 px-3 py-2 outline-none focus:border-gray-500 focus:shadow-sm'
             register={register}
             name='name'
-            placeholder='Name'
+            placeholder={t('profile.placeholders.name')}
             errorMessage={errors.name?.message}
           />
         </div>
       </div>
 
       <div className='mt-2 flex flex-col flex-wrap sm:flex-row'>
-        <div className='truncate pt-3 capitalize sm:w-[20%] sm:text-right'>Phone</div>
+        <div className='truncate pt-3 capitalize sm:w-[20%] sm:text-right'>{t('profile.labels.phone')}</div>
         <div className='sm:w-[80%] sm:pl-5'>
           <Controller
             control={control}
@@ -46,7 +49,7 @@ const Info = () => {
             render={({ field }) => (
               <InputNumber
                 classNameInput='w-full rounded-sm border border-gray-300 px-3 py-2 outline-none focus:border-gray-500 focus:shadow-sm'
-                placeholder='Phone'
+                placeholder={t('profile.placeholders.phone')}
                 errorMessage={errors.phone?.message}
                 {...field}
                 onChange={field.onChange}
@@ -68,6 +71,8 @@ type FormDataError = Omit<FormData, 'date_of_birth'> & {
 const profileSchema = userSchema.pick(['name', 'address', 'phone', 'avatar', 'date_of_birth'])
 
 const Profile = () => {
+  const { t } = useTranslation('user')
+
   const { setProfile } = useContext(AppContext)
 
   const [file, setFile] = useState<File>()
@@ -173,16 +178,16 @@ const Profile = () => {
     <>
       <div className='bg-white rounded-sm px-2 pb-10 md:px-7 md:pb-20 shadow'>
         <div className='border-b border-b-gray-200 py-6'>
-          <h1 className='text-lg font-medium capitalize text-gray-900'>My profile</h1>
+          <h1 className='text-lg font-medium capitalize text-gray-900'>{t('profile.title')}</h1>
 
-          <div className='mt-1 text-sm text-gray-700'>Manage profile information for account security</div>
+          <div className='mt-1 text-sm text-gray-700'>{t('profile.description')}</div>
         </div>
 
         <FormProvider {...methods}>
           <form className='mt-8 flex flex-col-reverse md:flex-row md:items-start' onSubmit={onSubmit}>
             <div className='mt-6 flex-grow md:mt-0 md:pr-12'>
               <div className='flex flex-col flex-wrap sm:flex-row'>
-                <div className='truncate pt-3 capitalize sm:w-[20%] sm:text-right'>Email</div>
+                <div className='truncate pt-3 capitalize sm:w-[20%] sm:text-right'>{t('profile.labels.email')}</div>
                 <div className='sm:w-[80%] sm:pl-5'>
                   <div className='pt-3 text-gray-700'>{profile?.email}</div>
                 </div>
@@ -191,13 +196,13 @@ const Profile = () => {
               <Info />
 
               <div className='mt-2 flex flex-col flex-wrap sm:flex-row'>
-                <div className='truncate pt-3 capitalize sm:w-[20%] sm:text-right'>Address</div>
+                <div className='truncate pt-3 capitalize sm:w-[20%] sm:text-right'>{t('profile.labels.address')}</div>
                 <div className='sm:w-[80%] sm:pl-5'>
                   <Input
                     classNameInput='w-full rounded-sm border border-gray-300 px-3 py-2 outline-none focus:border-gray-500 focus:shadow-sm'
                     register={register}
                     name='address'
-                    placeholder='Address'
+                    placeholder={t('profile.placeholders.address')}
                     errorMessage={errors.address?.message}
                   />
                 </div>
@@ -222,7 +227,7 @@ const Profile = () => {
                     type='submit'
                     className='flex items-center rounded-sm h-9 bg-orange px-5 text-center text-sm text-white hover:bg-orange/80'
                   >
-                    Save
+                    {t('buttons.save')}
                   </Button>
                 </div>
               </div>
@@ -241,8 +246,8 @@ const Profile = () => {
                 <InputFile onChange={handleChangeFile} />
 
                 <div className='mt-3 text-gray-400'>
-                  <div>Maximum file size: 1MB</div>
-                  <div>Format: .jpg, .jpeg, .png</div>
+                  <div>{t('profile.avatar.maximum file size')}: 1MB</div>
+                  <div>{t('profile.avatar.formats')}: .jpg, .jpeg, .png</div>
                 </div>
               </div>
             </div>
