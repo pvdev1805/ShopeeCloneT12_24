@@ -10,6 +10,9 @@ export default {
     extend: {
       colors: {
         orange: '#ee4d2d'
+      },
+      backgroundImage: {
+        'shopee-pattern': 'url(./src/assets/images/shopee-pattern.png)'
       }
     }
   },
