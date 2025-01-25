@@ -22,10 +22,18 @@ import USER_ZH from '../locales/zh/user.json'
 import LOGIN_ZH from '../locales/zh/login.json'
 import REGISTER_ZH from '../locales/zh/register.json'
 
+import HOME_PT from '../locales/pt/home.json'
+import PRODUCT_PT from '../locales/pt/product.json'
+import CART_PT from '../locales/pt/cart.json'
+import USER_PT from '../locales/pt/user.json'
+import LOGIN_PT from '../locales/pt/login.json'
+import REGISTER_PT from '../locales/pt/register.json'
+
 export const locales = {
   en: 'English',
   vi: 'Tiếng Việt',
-  zh: '中文'
+  zh: '中文',
+  pt: 'Português'
 } as const
 
 export const resources = {
@@ -52,6 +60,14 @@ export const resources = {
     user: USER_ZH,
     login: LOGIN_ZH,
     register: REGISTER_ZH
+  },
+  pt: {
+    home: HOME_PT,
+    product: PRODUCT_PT,
+    cart: CART_PT,
+    user: USER_PT,
+    login: LOGIN_PT,
+    register: REGISTER_PT
   }
 } as const
 

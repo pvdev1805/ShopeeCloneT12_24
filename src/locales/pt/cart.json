@@ -1,0 +1,33 @@
+{
+  "cart heading": "Carrinho",
+  "cart info": {
+    "product title": "Produto",
+    "price title": "Preço",
+    "quantity title": "Quantidade",
+    "total title": "Total",
+    "action title": "Ação"
+  },
+  "cart status": {
+    "empty": "Seu carrinho está vazio"
+  },
+  "product": {
+    "price": "Preço",
+    "quantity": "Quantidade",
+    "total": "Total",
+    "action": {
+      "delete": "Excluir"
+    }
+  },
+  "order": {
+    "total amount": "Valor total",
+    "saving": "Economia",
+    "action": {
+      "checkout": "Finalizar compra",
+      "select all": "Selecionar tudo",
+      "delete": "Excluir",
+      "buy now": "Comprar agora"
+    },
+    "products": "produtos",
+    "free ship deal": "Frete grátis para pedidos a partir de $0"
+  }
+}

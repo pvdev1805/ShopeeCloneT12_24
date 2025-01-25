@@ -1,0 +1,40 @@
+{
+  "actions": {
+    "login": "Entrar",
+    "register": "Registrar"
+  },
+  "aside filter": {
+    "all categories": "Todas as categorias",
+    "filter search": "Filtrar busca",
+    "categories": {
+      "Áo thun": "Camiseta",
+      "Đồng hồ": "Relógio",
+      "Điện thoại": "Telefone"
+    },
+    "price range": "Faixa de preço",
+    "price": {
+      "from": "De",
+      "to": "Até"
+    },
+    "apply filter": "Aplicar filtro",
+    "rating": "Avaliação",
+    "and above": "e acima",
+    "clear filter": "Limpar filtro"
+  },
+  "sort": {
+    "sort by": "Ordenar por",
+    "popularity": "Popularidade",
+    "new arrivals": "Novidades",
+    "best sellers": "Mais vendidos",
+    "price order": "Preço",
+    "price sort": {
+      "low to high": "Menor para maior",
+      "high to low": "Maior para menor"
+    }
+  },
+  "profile": {
+    "my account": "Minha conta",
+    "my orders": "Meus pedidos",
+    "logout": "Sair"
+  }
+}
