@@ -1,0 +1,11 @@
+{
+  "title": "Registrarse",
+  "form": {
+    "email": "Correo electrónico",
+    "password": "Contraseña",
+    "confirm password": "Confirmar contraseña",
+    "register": "Registrarse",
+    "already have account": "¿Ya tienes una cuenta?",
+    "login": "Iniciar sesión"
+  }
+}

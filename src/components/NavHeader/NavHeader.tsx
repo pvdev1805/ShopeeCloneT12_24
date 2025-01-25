@@ -58,6 +58,10 @@ const NavHeader = () => {
                   Português
                 </button>
 
+                <button className='py-2 px-3 hover:text-orange text-left' onClick={() => changeLanguage('es')}>
+                  Español
+                </button>
+
                 <button className='py-2 px-3 hover:text-orange mt-2 text-left' onClick={() => changeLanguage('vi')}>
                   Tiếng Việt
                 </button>

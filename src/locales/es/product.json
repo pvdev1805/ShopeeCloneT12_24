@@ -1,0 +1,21 @@
+{
+  "available": "Productos disponibles",
+  "no products in cart": "No hay productos en el carrito",
+  "recently added products": "Productos añadidos recientemente",
+  "free ship deal": "Envío gratis para pedidos desde $0",
+  "add to cart title": "Añadir al carrito",
+  "product": {
+    "product description": "Descripción del producto",
+    "status": {
+      "sold": "Vendido",
+      "off": "Descuento"
+    },
+    "quantity": "Cantidad",
+    "related products": "También te puede interesar"
+  },
+  "action": {
+    "add to cart": "Añadir al carrito",
+    "buy now": "Comprar ahora",
+    "view cart": "Ver carrito"
+  }
+}

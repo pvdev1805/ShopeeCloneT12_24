@@ -1,0 +1,10 @@
+{
+  "title": "Iniciar sesión",
+  "form": {
+    "email": "Correo electrónico",
+    "password": "Contraseña",
+    "login": "Iniciar sesión",
+    "do not have account": "¿No tienes una cuenta?",
+    "register": "Registrarse"
+  }
+}

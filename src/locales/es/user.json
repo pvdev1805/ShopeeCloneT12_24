@@ -1,0 +1,62 @@
+{
+  "edit profile": "Editar perfil",
+  "pages": {
+    "my account": "Mi cuenta",
+    "change password": "Mis pedidos",
+    "purchase history": "Historial de compras"
+  },
+  "profile": {
+    "title": "Mi perfil",
+    "description": "Gestiona la información del perfil para la seguridad de la cuenta.",
+    "labels": {
+      "email": "Correo electrónico",
+      "name": "Nombre",
+      "phone": "Teléfono",
+      "address": "Dirección",
+      "date of birth": "Fecha de nacimiento",
+      "date": "Fecha",
+      "month": "Mes",
+      "year": "Año"
+    },
+    "placeholders": {
+      "name": "Nombre",
+      "phone": "Teléfono",
+      "address": "Dirección"
+    },
+    "avatar": {
+      "title": "Cambiar avatar",
+      "maximum file size": "Tamaño máximo del archivo",
+      "formats": "Formatos"
+    }
+  },
+  "change password": {
+    "title": "Cambiar contraseña",
+    "description": "Para proteger tu cuenta, no compartas tu contraseña con otras personas.",
+    "labels": {
+      "current password": "Contraseña actual",
+      "new password": "Nueva contraseña",
+      "confirm password": "Confirmar contraseña"
+    },
+    "placeholders": {
+      "current password": "Contraseña actual",
+      "new password": "Nueva contraseña",
+      "confirm password": "Confirmar contraseña"
+    }
+  },
+  "purchase": {
+    "title": "Historial de compras",
+    "description": "Gestiona tu historial de compras para rastrear tus pedidos.",
+    "status": {
+      "all": "todos",
+      "waiting for confirmation": "esperando confirmación",
+      "waiting for getting": "esperando recogida",
+      "in progress": "en progreso",
+      "delivered": "entregado",
+      "cancelled": "cancelado"
+    },
+    "total": "Total"
+  },
+  "buttons": {
+    "save": "Guardar"
+  }
+}
