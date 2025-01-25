@@ -1,50 +1,107 @@
-# React + TypeScript + Vite
+# Shopee Clone
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## I. Description
 
-Currently, two official plugins are available:
+Shopee Clone is a web application that replicates the core functionalities of the Shopee e-commerce platform. This project is built using modern web technologies and libraries to provide a seamless and responsive user experience.
+This project is created solely for learning purposes and is **NOT** intended for commercial use
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## II. Main Features
 
-## Expanding the ESLint configuration
+- **User Authentication**:
+  - Login
+  - Register
+  - Log out
+- **Product List**:
+  - Pagination
+  - Sorting and filtering
+  - Searching
+- **Product Detail**:
+  - Image on hover zoom effect
+  - Descriptions are displayed in WYSIWYG HTML format
+  - Add to cart
+  - Buy Now
+- **Shopping Cart**:
+  - Order management: Add, edit, and delete products
+  - Checkout
+- **User Profile**:
+  - Update user information
+  - Upload Avatar
+  - Change Password
+  - Order tracking: View order status
+- **Localization**: Support for multiple languages including:
+  - English
+  - Chinese
+  - Portuguese
+  - Spanish
+  - Vietnamese.
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+## III. Technologies Used:
 
-- Configure the top-level `parserOptions` property like this:
+- **Programming Languages**: JavaScript, TypeScript
+- **UI/CSS Library**: TailwindCSS
+- **State Management**: Tanstack/React Query + React Context
+- **Form Management**: React Hook Form
+- **Build tool**: Vite
+- **Multilingualism**: i18next
+- **SEO**: React Helmet
+- **Unit Testing**: Vitest
+- _And many more_
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+## IV. Installation
+
+To install and run this project locally, follow the step-by-step instructions below:
+
+**1. Clone the repository:**
+
+```bash
+git clone https://github.com/pvdev1805/ShopeeCloneT12_24.git
 ```
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+**2. Get into the project's folder:**
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
-
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
+```bash
+cd ShopeeClone
 ```
+
+**3. Install dependencies:**
+If you are using `npm`, run the following command:
+
+```bash
+npm install
+```
+
+If you are using `yarn`, run the following command:
+
+```bash
+yarn
+```
+
+**4. Start running the project locally:**
+If you are using `npm`, run the following command:
+
+```bash
+npm run dev
+```
+
+If you are using `yarn`, run the following command:
+
+```bash
+yarn dev
+```
+
+The project will be run locally at port 3000 by the URL: `http://localhost:3000/`
+
+**5. Building for production:**
+If you are using `npm`, run the following command:
+
+```bash
+npm run build
+```
+
+If you are using `yarn`, run the following command:
+
+```bash
+yarn dev
+```
+
+If this command is executed successfully, the `dist` folder containing all building files for production, will be generated in the root folder of this project.
