@@ -1,0 +1,11 @@
+{
+  "title": "Đăng ký",
+  "form": {
+    "email": "Email",
+    "password": "Mật khẩu",
+    "confirm password": "Nhập lại mật khẩu",
+    "register": "Đăng ký",
+    "already have account": "Đã có tài khoản?",
+    "login": "Đăng nhập"
+  }
+}

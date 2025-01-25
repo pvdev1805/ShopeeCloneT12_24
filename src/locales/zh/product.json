@@ -1,0 +1,21 @@
+{
+  "available": "可用产品",
+  "no products in cart": "购物车中没有产品",
+  "recently added products": "最近添加的产品",
+  "free ship deal": "订单满$0免运费",
+  "add to cart title": "加入购物车",
+  "product": {
+    "product description": "产品描述",
+    "status": {
+      "sold": "已售出",
+      "off": "折扣"
+    },
+    "quantity": "数量",
+    "related products": "你可能也喜欢"
+  },
+  "action": {
+    "add to cart": "加入购物车",
+    "buy now": "立即购买",
+    "view cart": "查看购物车"
+  }
+}

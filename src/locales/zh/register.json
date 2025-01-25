@@ -1,0 +1,11 @@
+{
+  "title": "注册",
+  "form": {
+    "email": "电子邮件",
+    "password": "密码",
+    "confirm password": "确认密码",
+    "register": "注册",
+    "already have account": "已有帐号？",
+    "login": "登录"
+  }
+}

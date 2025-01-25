@@ -11,11 +11,14 @@ import { useContext } from 'react'
 import { AppContext } from '../../contexts/app.context'
 import Button from '../../components/Button'
 import { Helmet } from 'react-helmet-async'
+import { useTranslation } from 'react-i18next'
 
 type FormData = Pick<Schema, 'email' | 'password'>
 const loginSchema = schema.pick(['email', 'password'])
 
 const Login = () => {
+  const { t } = useTranslation('login')
+
   const { setIsAuthenticated, setProfile } = useContext(AppContext)
 
   const navigate = useNavigate()
@@ -75,14 +78,14 @@ const Login = () => {
           <div className='grid grid-cols-1 lg:grid-cols-5 py-12 lg:py-32 lg:pr-10'>
             <div className='lg:col-span-2 lg:col-start-4'>
               <form className='p-10 rounded bg-white shadow-sm' onSubmit={onSubmit} noValidate>
-                <div className='text-2xl'>Login</div>
+                <div className='text-2xl'>{t('title')}</div>
 
                 <Input
                   name='email'
                   register={register}
                   type='email'
                   className='mt-8'
-                  placeholder='Email'
+                  placeholder={t('form.email')}
                   errorMessage={errors.email?.message}
                   autoComplete='on'
                 />
@@ -93,7 +96,7 @@ const Login = () => {
                   type='password'
                   className='mt-2'
                   classNameEye='absolute right-[5px] h-5 w-5 cursor-pointer top-[12px]'
-                  placeholder='Password'
+                  placeholder={t('form.password')}
                   errorMessage={errors.password?.message}
                   autoComplete='on'
                 />
@@ -105,16 +108,16 @@ const Login = () => {
                     isLoading={loginMutation.isPending}
                     disabled={loginMutation.isPending}
                   >
-                    Login
+                    {t('form.login')}
                   </Button>
                 </div>
 
                 <div className='mt-8'>
                   <div className='flex items-center justify-center gap-2'>
-                    <span className='text-gray-400'>Don't have an account?</span>
+                    <span className='text-gray-400'>{t('form.do not have account')}</span>
 
                     <Link className='text-red-400' to='/register'>
-                      Sign Up
+                      {t('form.register')}
                     </Link>
                   </div>
                 </div>

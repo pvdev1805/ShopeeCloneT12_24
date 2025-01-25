@@ -12,11 +12,14 @@ import { useContext } from 'react'
 import { AppContext } from '../../contexts/app.context'
 import Button from '../../components/Button'
 import { Helmet } from 'react-helmet-async'
+import { useTranslation } from 'react-i18next'
 
 type FormData = Pick<Schema, 'email' | 'password' | 'confirm_password'>
 const loginSchema = schema.pick(['email', 'password', 'confirm_password'])
 
 const Register = () => {
+  const { t } = useTranslation('register')
+
   const { setIsAuthenticated, setProfile } = useContext(AppContext)
 
   const navigate = useNavigate()
@@ -96,14 +99,14 @@ const Register = () => {
           <div className='grid grid-cols-1 lg:grid-cols-5 py-12 lg:py-32 lg:pr-10'>
             <div className='lg:col-span-2 lg:col-start-4'>
               <form className='p-10 rounded bg-white shadow-sm' onSubmit={onSubmit} noValidate>
-                <div className='text-2xl'>Sign Up</div>
+                <div className='text-2xl'>{t('title')}</div>
 
                 <Input
                   name='email'
                   register={register}
                   type='email'
                   className='mt-8'
-                  placeholder='Email'
+                  placeholder={t('form.email')}
                   errorMessage={errors.email?.message}
                   autoComplete='on'
                 />
@@ -114,7 +117,7 @@ const Register = () => {
                   type='password'
                   className='mt-2'
                   classNameEye='absolute right-[5px] h-5 w-5 cursor-pointer top-[12px]'
-                  placeholder='Password'
+                  placeholder={t('form.password')}
                   errorMessage={errors.password?.message}
                   autoComplete='on'
                 />
@@ -125,7 +128,7 @@ const Register = () => {
                   type='password'
                   className='mt-2'
                   classNameEye='absolute right-[5px] h-5 w-5 cursor-pointer top-[12px]'
-                  placeholder='Confirm Password'
+                  placeholder={t('form.confirm password')}
                   errorMessage={errors.confirm_password?.message}
                   autoComplete='on'
                 />
@@ -137,16 +140,16 @@ const Register = () => {
                     isLoading={registerAccountMutation.isPending}
                     disabled={registerAccountMutation.isPending}
                   >
-                    Sign Up
+                    {t('form.register')}
                   </Button>
                 </div>
 
                 <div className='mt-8'>
                   <div className='flex items-center justify-center gap-2'>
-                    <span className='text-gray-400'>Already have an account?</span>
+                    <span className='text-gray-400'>{t('form.already have account')}</span>
 
                     <Link className='text-red-400' to='/login'>
-                      Log In
+                      {t('form.login')}
                     </Link>
                   </div>
                 </div>

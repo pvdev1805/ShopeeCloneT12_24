@@ -1,0 +1,62 @@
+{
+  "edit profile": "编辑资料",
+  "pages": {
+    "my account": "我的账户",
+    "change password": "我的订单",
+    "purchase history": "购买历史"
+  },
+  "profile": {
+    "title": "我的资料",
+    "description": "管理账户安全的资料信息。",
+    "labels": {
+      "email": "电子邮件",
+      "name": "姓名",
+      "phone": "电话",
+      "address": "地址",
+      "date of birth": "出生日期",
+      "date": "日期",
+      "month": "月份",
+      "year": "年份"
+    },
+    "placeholders": {
+      "name": "姓名",
+      "phone": "电话",
+      "address": "地址"
+    },
+    "avatar": {
+      "title": "更换头像",
+      "maximum file size": "最大文件大小",
+      "formats": "格式"
+    }
+  },
+  "change password": {
+    "title": "更改密码",
+    "description": "为了确保您的账户安全，请不要与他人分享您的密码。",
+    "labels": {
+      "current password": "当前密码",
+      "new password": "新密码",
+      "confirm password": "确认密码"
+    },
+    "placeholders": {
+      "current password": "当前密码",
+      "new password": "新密码",
+      "confirm password": "确认密码"
+    }
+  },
+  "purchase": {
+    "title": "购买历史",
+    "description": "管理您的购买历史以跟踪您的订单。",
+    "status": {
+      "all": "全部",
+      "waiting for confirmation": "等待确认",
+      "waiting for getting": "等待取货",
+      "in progress": "进行中",
+      "delivered": "已送达",
+      "cancelled": "已取消"
+    },
+    "total": "总计"
+  },
+  "buttons": {
+    "save": "保存"
+  }
+}

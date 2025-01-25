@@ -1,0 +1,10 @@
+{
+  "title": "登录",
+  "form": {
+    "email": "邮箱",
+    "password": "密码",
+    "login": "登录",
+    "do not have account": "没有账号？",
+    "register": "注册"
+  }
+}

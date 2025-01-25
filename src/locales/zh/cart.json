@@ -1,0 +1,33 @@
+{
+  "cart heading": "购物车",
+  "cart info": {
+    "product title": "产品",
+    "price title": "价格",
+    "quantity title": "数量",
+    "total title": "总计",
+    "action title": "操作"
+  },
+  "cart status": {
+    "empty": "你的购物车是空的"
+  },
+  "product": {
+    "price": "价格",
+    "quantity": "数量",
+    "total": "总计",
+    "action": {
+      "delete": "删除"
+    }
+  },
+  "order": {
+    "total amount": "总金额",
+    "saving": "节省",
+    "action": {
+      "checkout": "结账",
+      "select all": "全选",
+      "delete": "删除",
+      "buy now": "立即购买"
+    },
+    "products": "产品",
+    "free ship deal": "订单满$0免运费"
+  }
+}

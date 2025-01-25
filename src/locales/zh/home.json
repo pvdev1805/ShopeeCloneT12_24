@@ -1,0 +1,40 @@
+{
+  "actions": {
+    "login": "登录",
+    "register": "注册"
+  },
+  "aside filter": {
+    "all categories": "所有类别",
+    "filter search": "筛选搜索",
+    "categories": {
+      "Áo thun": "T恤",
+      "Đồng hồ": "手表",
+      "Điện thoại": "电话"
+    },
+    "price range": "价格范围",
+    "price": {
+      "from": "从",
+      "to": "到"
+    },
+    "apply filter": "应用",
+    "rating": "评分",
+    "and above": "及以上",
+    "clear filter": "清除筛选"
+  },
+  "sort": {
+    "sort by": "排序方式",
+    "popularity": "人气",
+    "new arrivals": "新品",
+    "best sellers": "畅销",
+    "price order": "价格",
+    "price sort": {
+      "low to high": "从低到高",
+      "high to low": "从高到低"
+    }
+  },
+  "profile": {
+    "my account": "我的账户",
+    "my orders": "我的订单",
+    "logout": "登出"
+  }
+}

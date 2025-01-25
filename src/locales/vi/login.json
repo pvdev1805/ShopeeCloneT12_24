@@ -1,0 +1,10 @@
+{
+  "title": "Đăng nhập",
+  "form": {
+    "email": "Email",
+    "password": "Mật khẩu",
+    "login": "Đăng nhập",
+    "do not have account": "Chưa có tài khoản?",
+    "register": "Đăng ký"
+  }
+}
